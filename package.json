@@ -14,7 +14,7 @@
   "author": "Azavea",
   "license": "Apache-2.0",
   "dependencies": {
-    "canvas": "^1.6.5",
+    "canvas": "^2.3.1",
     "csv": "^1.1.1",
     "d3-color": "^1.0.3",
     "d3-geo": "^1.6.3",
