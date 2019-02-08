@@ -14,7 +14,7 @@ process.stdout.write(
   '===============================\n' +
   'Reporting Efficiency Gap Scores\n' +
   '===============================\n' +
-  'Election results: ' + config.filename + '\n' +
+  'Change Statistics: ' + config.changefilename + '\n' +
   'District boundaries: ' + config.geojson + '\n\n' +
   'Infographics being added to `' + config.outputDirectory + '`\n\n'
 );
@@ -22,7 +22,7 @@ process.stdout.write(
 
 // Defining Classes
 
-// District: a geographic area represented by one seat in the delegation; votes are cast for one candidate in each party
+// District: a geographic area represented by one seat in the Chamber; votes are cast for one candidate in each party
 class District {
   constructor(identifier, votes, feature) {
     this.identifier = identifier;
@@ -42,119 +42,169 @@ class District {
 }
 
 // A collection of districts
-class Delegation {
-  constructor(name, abbreviation, districts) {
+class Chamber {
+  constructor(name, abbreviation, geometry, data) {
     this.name = name;
     this.abbreviation = abbreviation;
+    this.geometry = geometry;
+    this.stats = data;  
     this.districts = districts;
   }
 
-  // Seats: the number of seats in the delegation, one for each district
-  get seats() {
-    return this.districts.length;
+
+  get seat() {
+    return this.stats['official_count'];
   }
 
-  // Seat Results: the number of seats won by each party
-  get seatResults() {
-    var seatResults = [0,0];
-    this.districts.map(function(d) {
-      seatResults[d.result]++
-    });
-    return seatResults;
+  get orep() {
+    return this.stats['orep_tot'];
   }
 
-  // Vote Results: the number of votes won by each party
-  get voteResults() {
-    var voteResults = [0,0];
-    for (var i = 0; i < this.districts.length; i++) {
-      voteResults[0] += this.districts[i].votes[0];
-      voteResults[1] += this.districts[i].votes[1];
-    };
-    return voteResults;
+  get odem() {
+    return this.stats['odem_tot'];
   }
 
-  // Vote Results Imputation: imputes (guesses) the number of votes that would have been won by each party if all seats had been contested
-  // Conservatively assumes uncontesting party would have won additional votes ammounting to 25% of the new total
-  get voteResultsImputation() {
-    var voteResultsImputation = [0,0];
-    for (var i = 0; i < this.districts.length; i++) {
-      voteResultsImputation[0] += this.districts[i].votes[0] > 0 ? this.districts[i].votes[0] : Math.round(this.districts[i].votes[1] * (1/3));
-      voteResultsImputation[1] += this.districts[i].votes[1] > 0 ? this.districts[i].votes[1] : Math.round(this.districts[i].votes[0] * (1/3));
-    };
-    return voteResultsImputation;
+  get ooth() {
+    return this.seat - ( this.orep + this.odem );
   }
 
-  // Uncontested Seats: the number of seats left uncontested by each party
-  get uncontestedSeats() {
-    var uncontested = [0,0];
-    var districts = this.districts;
-    for (var i = 0; i < districts.length; i++) {
-      if (districts[i].votes[0] === 0) { uncontested[0]++; };
-      if (districts[i].votes[1] === 0) { uncontested[1]++; };
-    };
-    return uncontested;
+  get crep() {
+    return this.stats['crep_tot'];
   }
 
-  // Votes: the total number of votes cast
-  get votes() {
-    return this.voteResults[0] + this.voteResults[1];
+  get cdem() {
+    return this.stats['cdem_tot'];
   }
 
-  // Votes Imputation: imputes (guesses) the total number of votes that would have been cast if all seats had been contested
-  get votesImputation() {
-    return this.voteResultsImputation[0] + this.voteResultsImputation[1];
+  get coth() {
+    return this.seat - ( this.crep + this.cdem );
   }
 
-  // Seat Margin: the amount above or below 50% of all the seats that were won by the right-party; negative indicates left-party won more seats
-  get seatMargin() {
-    return this.seatResults[1] / this.seats - 0.5;
+  get reto() {
+    return this.stats['retu_tot'];
   }
 
-  // Vote Margin: the amount above or below 50% of all the votes that were won by the right-party; negative indicates left-party won more votes
-  get voteMargin() {
-    return this.voteResults[1] / this.votes - 0.5;
+  get emai() {
+    return this.stats['emai_tot'];
   }
 
-  // Vote Margin Imputation: imputes (guesses) the Vote Margin if all seats had been contested
-  get voteMarginImputation() {
-    return this.voteResultsImputation[1] / this.votesImputation - 0.5;
+  get wfor() {
+    return this.stats['wfor_tot'];
   }
 
-  // Efficiency Gap: a measure of how effectively votes were distributed by the right-party; negative indicates votes were more effectively distributed by the left-party
-  get efficiencyGap() {
-    return this.seatMargin - (2 * this.voteMargin);
+  get yfcb() {
+    return this.stats['yfcb_tot'];
   }
 
-  // Efficiency Gap Imputation: imputes (guesses) the Efficiency Gap if all seats had been contested
-  get efficiencyGapImputation() {
-    return this.seatMargin - (2 * this.voteMarginImputation);
+  get ytwi() {
+    return this.stats['ytwi_tot'];
   }
 
-  // Efficiency Gap Seats: the seat advantage in the Delegation that results from the Efficiency Gap; negative indicates the left-party had an advantage
-  get efficiencyGapSeats() {
-    if (this.seats === 1) { return 0; }
-    else {
-      var efficiencyGapSeats = Math.round(Math.abs(this.efficiencyGap * this.seats));
-      if (efficiencyGapSeats === 0) { return 0; }
-      else {
-        var benefittingParty = this.efficiencyGap < 0 ? 0 : 1;
-        return efficiencyGapSeats < this.seatResults[benefittingParty] ? efficiencyGapSeats : this.seatResults[benefittingParty];
-      }
-    }
+  get new_officials() {
+    return this.seat - this.reto;
   }
 
-  // Efficiency Gap Seats Imputation: imputes (guesses) the Efficiency Gap Seats if all seats had been contested
-  get efficiencyGapSeatsImputation() {
-    if (this.seats === 1) { return 0; }
-    else {
-      var efficiencyGapSeats = Math.round(Math.abs(this.efficiencyGapImputation * this.seats));
-      if (efficiencyGapSeats === 0) { return 0; }
-      else {
-        var benefittingParty = this.efficiencyGapImputation < 0 ? 0 : 1;
-        return efficiencyGapSeats < this.seatResults[benefittingParty] ? efficiencyGapSeats : this.seatResults[benefittingParty];
-      }
-    }
-  }
+  // // Seat Results: the number of seats won by each party
+  // get seatResults() {
+  //   var seatResults = [0,0];
+  //   this.districts.map(function(d) {
+  //     seatResults[d.result]++
+  //   });
+  //   return seatResults;
+  // }
+
+  // // Vote Results: the number of votes won by each party
+  // get voteResults() {
+  //   var voteResults = [0,0];
+  //   for (var i = 0; i < this.districts.length; i++) {
+  //     voteResults[0] += this.districts[i].votes[0];
+  //     voteResults[1] += this.districts[i].votes[1];
+  //   };
+  //   return voteResults;
+  // }
+
+  // // Vote Results Imputation: imputes (guesses) the number of votes that would have been won by each party if all seats had been contested
+  // // Conservatively assumes uncontesting party would have won additional votes ammounting to 25% of the new total
+  // get voteResultsImputation() {
+  //   var voteResultsImputation = [0,0];
+  //   for (var i = 0; i < this.districts.length; i++) {
+  //     voteResultsImputation[0] += this.districts[i].votes[0] > 0 ? this.districts[i].votes[0] : Math.round(this.districts[i].votes[1] * (1/3));
+  //     voteResultsImputation[1] += this.districts[i].votes[1] > 0 ? this.districts[i].votes[1] : Math.round(this.districts[i].votes[0] * (1/3));
+  //   };
+  //   return voteResultsImputation;
+  // }
+
+  // // Uncontested Seats: the number of seats left uncontested by each party
+  // get uncontestedSeats() {
+  //   var uncontested = [0,0];
+  //   var districts = this.districts;
+  //   for (var i = 0; i < districts.length; i++) {
+  //     if (districts[i].votes[0] === 0) { uncontested[0]++; };
+  //     if (districts[i].votes[1] === 0) { uncontested[1]++; };
+  //   };
+  //   return uncontested;
+  // }
+
+  // // Votes: the total number of votes cast
+  // get votes() {
+  //   return this.voteResults[0] + this.voteResults[1];
+  // }
+
+  // // Votes Imputation: imputes (guesses) the total number of votes that would have been cast if all seats had been contested
+  // get votesImputation() {
+  //   return this.voteResultsImputation[0] + this.voteResultsImputation[1];
+  // }
+
+  // // Seat Margin: the amount above or below 50% of all the seats that were won by the right-party; negative indicates left-party won more seats
+  // get seatMargin() {
+  //   return this.seatResults[1] / this.seats - 0.5;
+  // }
+
+  // // Vote Margin: the amount above or below 50% of all the votes that were won by the right-party; negative indicates left-party won more votes
+  // get voteMargin() {
+  //   return this.voteResults[1] / this.votes - 0.5;
+  // }
+
+  // // Vote Margin Imputation: imputes (guesses) the Vote Margin if all seats had been contested
+  // get voteMarginImputation() {
+  //   return this.voteResultsImputation[1] / this.votesImputation - 0.5;
+  // }
+
+  // // Efficiency Gap: a measure of how effectively votes were distributed by the right-party; negative indicates votes were more effectively distributed by the left-party
+  // get efficiencyGap() {
+  //   return this.seatMargin - (2 * this.voteMargin);
+  // }
+
+  // // Efficiency Gap Imputation: imputes (guesses) the Efficiency Gap if all seats had been contested
+  // get efficiencyGapImputation() {
+  //   return this.seatMargin - (2 * this.voteMarginImputation);
+  // }
+
+  // // Efficiency Gap Seats: the seat advantage in the Chamber that results from the Efficiency Gap; negative indicates the left-party had an advantage
+  // get efficiencyGapSeats() {
+  //   if (this.seats === 1) { return 0; }
+  //   else {
+  //     var efficiencyGapSeats = Math.round(Math.abs(this.efficiencyGap * this.seats));
+  //     if (efficiencyGapSeats === 0) { return 0; }
+  //     else {
+  //       var benefittingParty = this.efficiencyGap < 0 ? 0 : 1;
+  //       return efficiencyGapSeats < this.seatResults[benefittingParty] ? efficiencyGapSeats : this.seatResults[benefittingParty];
+  //     }
+  //   }
+  // }
+
+  // // Efficiency Gap Seats Imputation: imputes (guesses) the Efficiency Gap Seats if all seats had been contested
+  // get efficiencyGapSeatsImputation() {
+  //   if (this.seats === 1) { return 0; }
+  //   else {
+  //     var efficiencyGapSeats = Math.round(Math.abs(this.efficiencyGapImputation * this.seats));
+  //     if (efficiencyGapSeats === 0) { return 0; }
+  //     else {
+  //       var benefittingParty = this.efficiencyGapImputation < 0 ? 0 : 1;
+  //       return efficiencyGapSeats < this.seatResults[benefittingParty] ? efficiencyGapSeats : this.seatResults[benefittingParty];
+  //     }
+  //   }
+  // }
 
   // District Boundaries: a GeoJSON FeatureCollection of the District's geographic bounds
   get districtBoundaries() {
@@ -175,54 +225,76 @@ class Party {
   }
 }
 
-// Election Results: the results for a set of Delegations from an election between a left-Party and a right-Party
+// Election Results: the results for a set of Chambers from an election between a left-Party and a right-Party
 class ElectionResults {
-  constructor(leftParty, rightParty, delegations) {
+  constructor(leftParty, rightParty, Chambers) {
     this.parties = { left: leftParty, right: rightParty };
-    this.delegations = delegations;
+    this.Chambers = Chambers;
+  }
+}
+
+// ChangeReport: the report for a set of Chambers from an election between a left-Party and a right-Party
+class ChangeReport {
+  constructor(leftParty, rightParty, otherParty, Chambers) {
+    this.parties = { left: leftParty, right: rightParty, other: otherParty };
+    this.Chambers = Chambers;
   }
 }
 
 
-// Empty arrays for recording delegations
-var delegationIdentifiers = [],
-    collectedDelegations = [];
+// Empty arrays for recording Chambers
+var ChamberIdentifiers = [],
+    collectedChambers = [];
 
 // Load CSV and GeoJSON file
 var csvData = fs.readFileSync(config.filename, 'utf8');
-var geojson = JSON.parse(fs.readFileSync(config.geojson, 'utf8'));
+var geojsonLocalPoly = JSON.parse(fs.readFileSync(config.localpolygeojson, 'utf8'));
+var geojsonLocalCent = JSON.parse(fs.readFileSync(config.localcentgeojson, 'utf8'));
+var geojsonStatePoly = JSON.parse(fs.readFileSync(config.statepolygeojson, 'utf8'));
+
+
 
 // Reformat CSV results and GeoJSON boundaries to an Election Results
 csv(csvData, { columns: true }, function(err,data) {
 
   data.map(function(d) {
 
-    var delegationIdentifier = d[config.delegationIdentifier]
+    var ChamberIdentifier = d[config.ChamberIdentifier]
 
-    // Add new delegation
-    if (delegationIdentifiers.indexOf(delegationIdentifier) === -1) {
-      delegationIdentifiers.push(delegationIdentifier);
-      var delegationName = d[config.delegationName];
-      collectedDelegations.push(new Delegation(delegationName, delegationIdentifier, []))
+    // Add new Chamber
+    if (ChamberIdentifiers.indexOf(ChamberIdentifier) === -1) {
+      ChamberIdentifiers.push(ChamberIdentifier);
+
+      //state gets state, city with poly gets city, city without poly gets state poly and city centroid 
+      var chamberGeometry = geojson.features.filter(function(f) {
+        return f.properties[config.ChamberIdentifier] === ChamberIdentifier && f.properties[config.districtIdentifier] === districtIdentifier;
+      })[0];
+
+
+      var ChamberName = d[config.ChamberName];
+      var ChamberData = d;
+      collectedChambers.push(new Chamber(ChamberName, ChamberIdentifier, chamberGeometry, chamberData, []))
     }
 
-    var delegationIndex = delegationIdentifiers.indexOf(delegationIdentifier);
+    var ChamberIndex = ChamberIdentifiers.indexOf(ChamberIdentifier);
 
     // Add new district
-    var districtIdentifier = d[config.districtIdentifier];
-    var districtVotes = [d[config.partyLeftVotes], d[config.partyRightVotes]];
-    var districtFeature = geojson.features.filter(function(f) {
-      return f.properties[config.delegationIdentifier] === delegationIdentifier && f.properties[config.districtIdentifier] === districtIdentifier;
-    })[0];
+    //var districtIdentifier = d[config.districtIdentifier];
+    //var districtVotes = [d[config.partyLeftVotes], d[config.partyRightVotes]];
+    //var districtFeature = geojson.features.filter(function(f) {
+     // return f.properties[config.ChamberIdentifier] === ChamberIdentifier && f.properties[config.districtIdentifier] === districtIdentifier;
+    //})[0];
 
-    collectedDelegations[delegationIndex].districts.push(new District(districtIdentifier, districtVotes, districtFeature));
+    //collectedChambers[ChamberIndex].districts.push(new District(districtIdentifier, districtVotes, districtFeature));
 
   });
 
   var dataLeftParty = new Party(config.partyLeftName, '#45bae8');
   var dataRightParty = new Party(config.partyRightName, '#ff595f');
+  var dataOtherParty = new Party(config.partyOtherName, '#d3d3d3');
 
-  var results = new ElectionResults(dataLeftParty, dataRightParty, collectedDelegations);
+
+  var results = new ChangeReport(dataLeftParty, dataRightParty, dataOtherParty, collectedChambers);
 
   // Generate infographics
   report(results);
@@ -231,19 +303,19 @@ csv(csvData, { columns: true }, function(err,data) {
 // A function that generates infographics from an Election Results object
 function report(election) {
 
-  // Generate a report for each Delegation
-  for (var i = 0; i < election.delegations.length; i++) {
+  // Generate a report for each Chamber
+  for (var i = 0; i < election.Chambers.length; i++) {
 
-    var delegation = election.delegations[i];
-    var districts = delegation.districtBoundaries;
+    var Chamber = election.Chambers[i];
+    var districts = Chamber.districtBoundaries;
 
     // Party Advantage
     var advantageParty = undefined;
-    if (delegation.efficiencyGapImputation <= 0) { advantageParty = 'left'; }
-    if (delegation.efficiencyGapImputation > 0) { advantageParty = 'right'; }
+    if (Chamber.efficiencyGapImputation <= 0) { advantageParty = 'left'; }
+    if (Chamber.efficiencyGapImputation > 0) { advantageParty = 'right'; }
 
     // Formatted Efficiency Gap advantage
-    var efficiencyGapPercent = Math.round(Math.abs(delegation.efficiencyGapImputation) * 1000) / 10 + '%'
+    var efficiencyGapPercent = Math.round(Math.abs(Chamber.efficiencyGapImputation) * 1000) / 10 + '%'
 
     // Canvas dimensions
     var width = 1200,
@@ -288,7 +360,7 @@ function report(election) {
     context.fillStyle = background;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Custom map projection for each Delegation
+    // Custom map projection for each Chamber
     var projection = d3.geoAlbers();
     var path = d3.geoPath()
         .projection(projection);
@@ -341,7 +413,7 @@ function report(election) {
     context.fillStyle = sentenceFill;
 
     // Title
-    var titleText = delegation.name + ' Congressional Delegation';
+    var titleText = Chamber.name + ' Congressional Chamber';
     context.font = titleFont;
     context.fillText(titleText, leftMargin, grid);
     var titleWidth = context.measureText(titleText).width;
@@ -390,10 +462,10 @@ function report(election) {
     }
 
     // Caveats for uncontested races
-    var uncontested = delegation.uncontestedSeats;
+    var uncontested = Chamber.uncontestedSeats;
 
     var uncontestedSeats = (uncontested[0] === 0 && uncontested[1] === 0) ? false : true;
-    var significantAdvantage = delegation.efficiencyGapSeatsImputation !== 0;
+    var significantAdvantage = Chamber.efficiencyGapSeatsImputation !== 0;
 
     // Main sentence
     var mainSentenceContent = [
@@ -405,7 +477,7 @@ function report(election) {
       { t: efficiencyGapPercent + ' efficiency gap advantage*', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: true },
       // Third Line
       { t: 'worth ', s: sentenceFont, h: false, n: true },
-      { t: Math.abs(delegation.efficiencyGapSeatsImputation) + ' extra ' + (delegation.efficiencyGapSeatsImputation === 1 ? 'seat' : 'seats'), s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
+      { t: Math.abs(Chamber.efficiencyGapSeatsImputation) + ' extra ' + (Chamber.efficiencyGapSeatsImputation === 1 ? 'seat' : 'seats'), s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
       { t: (uncontestedSeats ? ', but some seats' : '.'), s: sentenceFont, h: false, n: false },
       // Possible Fourth Line
       { t: (uncontestedSeats ? 'were left uncontested.**' : ''), s: sentenceFont, h: false, n: true },
@@ -454,21 +526,21 @@ function report(election) {
     var voteRectangleBaseline = Math.floor(graphOriginY + graphHeight * (1/3)),
         seatRectangleBaseline = Math.ceil(graphOriginY + graphHeight * (2/3));
 
-    var votes = delegation.voteResults,
-        seats = delegation.seatResults;
+    var votes = Chamber.voteResults,
+        seats = Chamber.seatResults;
 
     voteScale = d3.scaleLinear()
       .domain([0, votes[0] + votes[1]])
       .range([0, graphWidth]);
 
     var seatRectangleMargin = 4,
-        seatRectangleWidth = Math.floor(graphWidth / delegation.seats) - seatRectangleMargin;
+        seatRectangleWidth = Math.floor(graphWidth / Chamber.seats) - seatRectangleMargin;
 
     seatScale = d3.scaleLinear()
-      .domain([1, delegation.seats])
+      .domain([1, Chamber.seats])
       .range([
         graphOriginX + 2,
-        (graphOriginX + graphWidth) - Math.floor((graphWidth / delegation.seats)) + seatRectangleMargin
+        (graphOriginX + graphWidth) - Math.floor((graphWidth / Chamber.seats)) + seatRectangleMargin
       ]);
 
     context.font = annotationFont;
@@ -508,8 +580,8 @@ function report(election) {
     }
 
     //// Draw rectangles for seats
-    for (var s = 1; s <= delegation.seats; s++) {
-      var seatColor = s <= delegation.seatResults[0] ? election.parties.left.color : election.parties.right.color;
+    for (var s = 1; s <= Chamber.seats; s++) {
+      var seatColor = s <= Chamber.seatResults[0] ? election.parties.left.color : election.parties.right.color;
 
       // shadow
       context.fillStyle = d3.color(seatColor).darker(1).toString();
@@ -549,14 +621,14 @@ function report(election) {
 
     if (uncontested[0] >= 1) {
       context.beginPath();
-      context.moveTo(seatScale(delegation.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline);
-      context.lineTo(seatScale(delegation.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline + 15);
-      context.lineTo(seatScale(delegation.seats) + seatRectangleWidth / 2, uncontestedBaseline + 15);
-      context.lineTo(seatScale(delegation.seats) + seatRectangleWidth / 2, uncontestedBaseline);
+      context.moveTo(seatScale(Chamber.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline);
+      context.lineTo(seatScale(Chamber.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline + 15);
+      context.lineTo(seatScale(Chamber.seats) + seatRectangleWidth / 2, uncontestedBaseline + 15);
+      context.lineTo(seatScale(Chamber.seats) + seatRectangleWidth / 2, uncontestedBaseline);
       context.stroke();
       context.closePath();
 
-      context.fillText('uncontested', seatScale(delegation.seats - (uncontested[0] - 1) / 2) + seatRectangleWidth / 2, uncontestedBaseline + 20);
+      context.fillText('uncontested', seatScale(Chamber.seats - (uncontested[0] - 1) / 2) + seatRectangleWidth / 2, uncontestedBaseline + 20);
     };
 
     if (uncontested[1] >= 1) {
@@ -584,9 +656,9 @@ function report(election) {
     context.drawImage(image, leftMargin, height - leftMargin * 1.1);
     context.globalAlpha = 1.0;
 
-    process.stdout.write(delegation.name + ': ' + Math.round(delegation.efficiencyGapImputation * 100) / 100 + '\n');
+    process.stdout.write(Chamber.name + ': ' + Math.round(Chamber.efficiencyGapImputation * 100) / 100 + '\n');
 
     // Save image to the output directory
-    canvas.pngStream().pipe(fs.createWriteStream(config.outputDirectory + '/' + delegation.name + ".png"));
+    //canvas.pngStream().pipe(fs.createWriteStream(config.outputDirectory + '/' + Chamber.name + ".png"));
   }
 }
