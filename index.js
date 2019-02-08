@@ -1,8 +1,10 @@
 var fs = require('fs'),
     csv = require('csv-parse'),
     d3 = Object.assign({}, require("d3-geo"), require("d3-geo-projection"), require('d3-scale'), require('d3-color')),
-    Canvas = require('canvas'),
     YAML = require('yamljs');
+
+const { createCanvas, loadImage } = require('canvas')
+const { Image } = require('canvas')
 
 // Load configuration
 var config = YAML.load('config.yml');
@@ -249,7 +251,7 @@ function report(election) {
         leftMargin = 60;
 
     // A new Canvas object to draw on
-    var canvas = new Canvas(width, height),
+    var canvas = createCanvas(width, height),
         context = canvas.getContext("2d");
 
 
@@ -572,8 +574,11 @@ function report(election) {
     context.globalAlpha = 1.0;
 
     // Azavea Logo
+    
+
+
     var logo = fs.readFileSync('data_analytics.png');
-    var image = new Canvas.Image;
+    const image = new Image()
     image.src = logo;
     context.globalAlpha = 0.6;
     context.drawImage(image, leftMargin, height - leftMargin * 1.1);
