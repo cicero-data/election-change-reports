@@ -2,11 +2,11 @@
 filename: 'results.csv'
 
 #CSV file with 
-changefilename: 'datasrc/chamber-change.csv'
+changefilename: 'chamber-change.csv'
 
 
 # Identifier field with name of each chamber (should be the same in both CSV results and GeoJSON boundaries file)
-chamberIdentifier: 'id'
+chamberIdentifier: 'state'
 
 # Column name from CSV file with the formatted name of each chamber
 chamberName: 'name_formal'
@@ -36,11 +36,11 @@ geojson: 'districts.geojson'
 
 #Change report geometries
 localpolygeojson: 'districts.geojson'
-localcentgeojson: 'districts.geojson'
-statepolygeojson: 'districts.geojson'
+localcentgeojson: 'geometry/lo-cent.geojson'
+statepolygeojson: 'geometry/us.geojson'
 
 
 
 
 # Output directory for saving infographics
-outputDirectory: 'figures'
+outputDirectory: 'change-reports'

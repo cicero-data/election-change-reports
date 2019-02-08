@@ -15,7 +15,8 @@ process.stdout.write(
   'Reporting Efficiency Gap Scores\n' +
   '===============================\n' +
   'Change Statistics: ' + config.changefilename + '\n' +
-  'District boundaries: ' + config.geojson + '\n\n' +
+  'Local centroids: ' + config.localcentgeojson + '\n\n' +
+  'State boundaries: ' + config.statepolygeojson + '\n\n' +
   'Infographics being added to `' + config.outputDirectory + '`\n\n'
 );
 
@@ -43,12 +44,12 @@ class District {
 
 // A collection of districts
 class Chamber {
-  constructor(name, abbreviation, geometry, data) {
+  constructor(name, abbreviation, geometry, point, data) {
     this.name = name;
     this.abbreviation = abbreviation;
     this.geometry = geometry;
-    this.stats = data;  
-    this.districts = districts;
+    this.point = point;
+    this.stats = data;
   }
 
 
@@ -101,7 +102,7 @@ class Chamber {
   }
 
   get new_officials() {
-    return this.seat - this.reto;
+    return this.stats['official_count'] - this.stats['retu_tot'];
   }
 
   // // Seat Results: the number of seats won by each party
@@ -209,9 +210,8 @@ class Chamber {
   // District Boundaries: a GeoJSON FeatureCollection of the District's geographic bounds
   get districtBoundaries() {
     var boundaries = { type: 'FeatureCollection', features: [] };
-    for (var d = 0; d < this.districts.length; d++) {
-      boundaries.features.push(this.districts[d].boundary);
-    }
+    boundaries.features.push(this.geometry);
+    boundaries.features.push(this.point);
     return boundaries;
   }
 
@@ -247,8 +247,7 @@ var ChamberIdentifiers = [],
     collectedChambers = [];
 
 // Load CSV and GeoJSON file
-var csvData = fs.readFileSync(config.filename, 'utf8');
-var geojsonLocalPoly = JSON.parse(fs.readFileSync(config.localpolygeojson, 'utf8'));
+var csvData = fs.readFileSync(config.changefilename, 'utf8');
 var geojsonLocalCent = JSON.parse(fs.readFileSync(config.localcentgeojson, 'utf8'));
 var geojsonStatePoly = JSON.parse(fs.readFileSync(config.statepolygeojson, 'utf8'));
 
@@ -259,21 +258,35 @@ csv(csvData, { columns: true }, function(err,data) {
 
   data.map(function(d) {
 
-    var ChamberIdentifier = d[config.ChamberIdentifier]
+    //var ChamberIdentifier = d[config.ChamberIdentifier]
+    var ChamberStateId = d['state']
+    var ChamberIdentifier = d['id']
 
     // Add new Chamber
     if (ChamberIdentifiers.indexOf(ChamberIdentifier) === -1) {
       ChamberIdentifiers.push(ChamberIdentifier);
 
+
       //state gets state, city with poly gets city, city without poly gets state poly and city centroid 
-      var chamberGeometry = geojson.features.filter(function(f) {
-        return f.properties[config.ChamberIdentifier] === ChamberIdentifier && f.properties[config.districtIdentifier] === districtIdentifier;
-      })[0];
+      var chamberGeometry = geojsonStatePoly.features.find(function(f) {
+        //return f.properties[config.ChamberIdentifier] === ChamberIdentifier;
+        return f.properties['STUSPS'] === ChamberStateId;
+      });
+      
+
+      console.log( 'this chamber --> ', ChamberIdentifier )
+
+      var chamberLocalPoint = geojsonLocalCent.features.find(function(f) {
+           return f.properties['id'] === ChamberIdentifier;
+      });
 
 
-      var ChamberName = d[config.ChamberName];
-      var ChamberData = d;
-      collectedChambers.push(new Chamber(ChamberName, ChamberIdentifier, chamberGeometry, chamberData, []))
+      //var ChamberName = d[config.ChamberName];
+      var ChamberName = d['name_formal'];
+      
+      //console.log( "name of chamber --> ", d['name_formal'] )
+
+      collectedChambers.push(new Chamber(ChamberName, ChamberIdentifier, chamberGeometry, chamberLocalPoint, d, []))
     }
 
     var ChamberIndex = ChamberIdentifiers.indexOf(ChamberIdentifier);
@@ -304,18 +317,27 @@ csv(csvData, { columns: true }, function(err,data) {
 function report(election) {
 
   // Generate a report for each Chamber
-  for (var i = 0; i < election.Chambers.length; i++) {
-
+  //for (var i = 0; i < election.Chambers.length; i++) {
+  for (var i = 0; i < 5; i++) {
     var Chamber = election.Chambers[i];
-    var districts = Chamber.districtBoundaries;
+
+    //console.log( 'new officials --> ', Chamber.new_officials())
+
+    console.log( 'new officials --> ', Chamber );
+
+
+    //var districts = Chamber.districtBoundaries;
+    var geometry = Chamber.geometry;
+    var point = Chamber.point;
+
 
     // Party Advantage
-    var advantageParty = undefined;
-    if (Chamber.efficiencyGapImputation <= 0) { advantageParty = 'left'; }
-    if (Chamber.efficiencyGapImputation > 0) { advantageParty = 'right'; }
+    //var advantageParty = undefined;
+    //if (Chamber.efficiencyGapImputation <= 0) { advantageParty = 'left'; }
+    //if (Chamber.efficiencyGapImputation > 0) { advantageParty = 'right'; }
 
     // Formatted Efficiency Gap advantage
-    var efficiencyGapPercent = Math.round(Math.abs(Chamber.efficiencyGapImputation) * 1000) / 10 + '%'
+    //var efficiencyGapPercent = Math.round(Math.abs(Chamber.efficiencyGapImputation) * 1000) / 10 + '%'
 
     // Canvas dimensions
     var width = 1200,
@@ -334,6 +356,7 @@ function report(election) {
 
     // Style
     var background = '#292d39',
+        ptbackground = '#bfff80',
         titleFont = 'bold 42px Helvetica',
         subtitleFont = '34px Helvetica',
         sentenceFill = '#fff',
@@ -365,8 +388,8 @@ function report(election) {
     var path = d3.geoPath()
         .projection(projection);
 
-    var b = path.bounds(districts),
-      centroid = d3.geoCentroid(districts),
+    var b = path.bounds(geometry),
+      centroid = d3.geoCentroid(geometry),
       pOffset = b[1][1] - b[0][1] * 0.3;
 
     projection
@@ -374,7 +397,7 @@ function report(election) {
         .scale(1)
         .translate([0, 0]);
 
-    bounds = path.bounds(districts);
+    bounds = path.bounds(geometry);
 
     var scale = 0.9 / Math.max((bounds[1][0] - bounds[0][0]) / mapWidth, (bounds[1][1] - bounds[0][1]) / mapHeight),
         translate = [(mapWidth - scale * (bounds[1][0] + bounds[0][0])) / 2 + (width - mapWidth), grid * 1.5 + (mapHeight - scale * (bounds[1][1] + bounds[0][1])) / 2];
@@ -386,7 +409,7 @@ function report(election) {
     // Draw districts shadow
     context.fillStyle = d3.color(background).darker(1).toString();
     context.beginPath();
-    path.context(context)(districts);
+    path.context(context)(geometry);
     context.fill();
 
 
@@ -400,7 +423,15 @@ function report(election) {
     context.strokeStyle = districtStroke;
     context.fillStyle = background;//d3.color(background).brighter(1).toString();
     context.beginPath();
-    path.context(context)(districts);
+    path.context(context)(geometry);
+    context.fill();
+    context.stroke();
+
+    // Draw point
+    context.strokeStyle = districtStroke;
+    context.fillStyle = ptbackground;//d3.color(background).brighter(1).toString();
+    context.beginPath();
+    path.context(context)(point);
     context.fill();
     context.stroke();
 
@@ -413,7 +444,7 @@ function report(election) {
     context.fillStyle = sentenceFill;
 
     // Title
-    var titleText = Chamber.name + ' Congressional Chamber';
+    var titleText = Chamber.name;
     context.font = titleFont;
     context.fillText(titleText, leftMargin, grid);
     var titleWidth = context.measureText(titleText).width;
@@ -462,188 +493,207 @@ function report(election) {
     }
 
     // Caveats for uncontested races
-    var uncontested = Chamber.uncontestedSeats;
+    //var uncontested = Chamber.uncontestedSeats;
 
-    var uncontestedSeats = (uncontested[0] === 0 && uncontested[1] === 0) ? false : true;
-    var significantAdvantage = Chamber.efficiencyGapSeatsImputation !== 0;
+    //var uncontestedSeats = (uncontested[0] === 0 && uncontested[1] === 0) ? false : true;
+    //var significantAdvantage = Chamber.efficiencyGapSeatsImputation !== 0;
 
-    // Main sentence
+
+    console.log( '49085349865  ',  Chamber.stats.official_count ) 
+    // New Officials Sentence
     var mainSentenceContent = [
       // First Line
-      { t: 'The ', s: sentenceFont, h: false, n: false },
-      { t: election.parties[advantageParty].name + ' Party', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
-      { t: ' had a', s: sentenceFont, h: false, n: false },
-      // Second Line
-      { t: efficiencyGapPercent + ' efficiency gap advantage*', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: true },
-      // Third Line
-      { t: 'worth ', s: sentenceFont, h: false, n: true },
-      { t: Math.abs(Chamber.efficiencyGapSeatsImputation) + ' extra ' + (Chamber.efficiencyGapSeatsImputation === 1 ? 'seat' : 'seats'), s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
-      { t: (uncontestedSeats ? ', but some seats' : '.'), s: sentenceFont, h: false, n: false },
-      // Possible Fourth Line
-      { t: (uncontestedSeats ? 'were left uncontested.**' : ''), s: sentenceFont, h: false, n: true },
+      //{ t: 'The ', s: sentenceFont, h: false, n: false },
+      { t: 'New Officials: ' + (Chamber.stats.official_count - Chamber.stats.retu_tot ) + ' out of ' + Chamber.stats.official_count, s: sentenceBoldFont, h: true, n: false },
+      
     ];
 
-    // Write the context sentence
-    var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, election.parties[advantageParty].color, 48);
+    // Write the new officials sentence
+    var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, '#bfff80'  , 48);
     mainSentenceContent.map(function(phrase) {
       mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
     });
 
 
-    // Explanation
-    var explanationSentenceContent = [
-      {
-        t: ' * The "efficiency gap" measures how effectively a party\'s votes ',
-        s: disclaimerFont, h: false, n: false },
-        {
-          t: '    are distributed among districts and reveals partisan bias.',
-          s: disclaimerFont, h: false, n: true }
-    ];
-
-    var explanationSentence = new Sentence(leftMargin * 4, uncontestedSeats ? Math.ceil(grid * 8.5) : height - leftMargin * 0.8, disclaimerFont, annotationColor, 18);
-    explanationSentenceContent.map(function(phrase) {
-      explanationSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
-    });
-
-    // Disclaimers
-    if (uncontestedSeats) {
-      var estimateDisclaimerSentenceContent = [
-        {
-          t: '** This efficiency gap score assumes an opponent would have won',
-          s: disclaimerFont, h: false, n: false },
-        {
-          t: '    25% of the vote in uncontested seats.',
-          s: disclaimerFont, h: false, n: true }
-      ];
-
-      var estimateDisclaimerSentence = new Sentence(leftMargin * 4, height - leftMargin * 0.8, disclaimerFont, annotationColor, 18);
-      estimateDisclaimerSentenceContent.map(function(phrase) {
-        estimateDisclaimerSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
-      });
-    }
-
-    // Bar graph
-    var voteRectangleBaseline = Math.floor(graphOriginY + graphHeight * (1/3)),
-        seatRectangleBaseline = Math.ceil(graphOriginY + graphHeight * (2/3));
-
-    var votes = Chamber.voteResults,
-        seats = Chamber.seatResults;
-
-    voteScale = d3.scaleLinear()
-      .domain([0, votes[0] + votes[1]])
-      .range([0, graphWidth]);
-
-    var seatRectangleMargin = 4,
-        seatRectangleWidth = Math.floor(graphWidth / Chamber.seats) - seatRectangleMargin;
-
-    seatScale = d3.scaleLinear()
-      .domain([1, Chamber.seats])
-      .range([
-        graphOriginX + 2,
-        (graphOriginX + graphWidth) - Math.floor((graphWidth / Chamber.seats)) + seatRectangleMargin
-      ]);
-
-    context.font = annotationFont;
-
-    //// Draw rectangles for votes
-    if (votes[0] >= 1) {
-      // Left Party
-      //// shadow
-      context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
-      context.fillRect(graphOriginX + 1, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
-      //// highlight
-      context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
-      context.fillRect(graphOriginX + 3, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
-      //// fill
-      context.fillStyle = election.parties.left.color;
-      context.fillRect(graphOriginX + 2, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
-
-      context.fillText(Math.round(votes[0] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.left.name + ' vote', graphOriginX, voteRectangleBaseline - annotationMargin);
-
-    }
-
-    if (votes[1] >= 1) {
-      // Right Party
-      //// shadow
-      context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
-      context.fillRect(graphOriginX + voteScale(votes[0]) + 2, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);    //// highlight
-      //// highlight
-      context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
-      context.fillRect(graphOriginX + voteScale(votes[0]) + 4, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);    //// fill
-      //// fill
-      context.fillStyle = election.parties.right.color;
-      context.fillRect(graphOriginX + voteScale(votes[0]) + 3, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);
-
-      context.textAlign = 'end';
-      context.fillText(Math.round(votes[1] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.right.name + ' vote', graphOriginX + graphWidth, voteRectangleBaseline - annotationMargin);
-      context.textAlign = 'start';
-    }
-
-    //// Draw rectangles for seats
-    for (var s = 1; s <= Chamber.seats; s++) {
-      var seatColor = s <= Chamber.seatResults[0] ? election.parties.left.color : election.parties.right.color;
-
-      // shadow
-      context.fillStyle = d3.color(seatColor).darker(1).toString();
-      context.fillRect(seatScale(s) - 1,seatRectangleBaseline, seatRectangleWidth, rectangleHeight);
-
-      // highlight
-      context.fillStyle = d3.color(seatColor).brighter(1).toString();
-      context.fillRect(seatScale(s) + 1,seatRectangleBaseline, seatRectangleWidth, rectangleHeight);
-
-      // fill
-      context.fillStyle = seatColor;
-      context.fillRect(seatScale(s), seatRectangleBaseline, seatRectangleWidth, rectangleHeight);
-    }
-
-    if (seats[0] >= 1) {
-      context.fillStyle = election.parties.left.color;
-      context.fillText(seats[0] + ' ' + election.parties.left.name + ' ' + (seats[0] === 1 ? 'seat' : 'seats'), graphOriginX, seatRectangleBaseline - annotationMargin);
-    }
-    if (seats[1] >= 1) {
-      context.fillStyle = election.parties.right.color;
-      context.textAlign = 'end';
-      context.fillText(seats[1] + ' ' + election.parties.right.name + ' ' + (seats[1] === 1 ? 'seat' : 'seats'), graphOriginX + graphWidth, seatRectangleBaseline - annotationMargin);
-      context.textAlign = 'start';
-    }
 
 
-    // Uncontested races
-    var uncontestedBaseline = seatRectangleBaseline + rectangleHeight + seatRectangleMargin;
+    // // Main sentence
+    // var mainSentenceContent = [
+    //   // First Line
+    //   { t: 'The ', s: sentenceFont, h: false, n: false },
+    //   { t: election.parties[advantageParty].name + ' Party', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
+    //   { t: ' had a', s: sentenceFont, h: false, n: false },
+    //   // Second Line
+    //   { t: efficiencyGapPercent + ' efficiency gap advantage*', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: true },
+    //   // Third Line
+    //   { t: 'worth ', s: sentenceFont, h: false, n: true },
+    //   { t: Math.abs(Chamber.efficiencyGapSeatsImputation) + ' extra ' + (Chamber.efficiencyGapSeatsImputation === 1 ? 'seat' : 'seats'), s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
+    //   { t: (uncontestedSeats ? ', but some seats' : '.'), s: sentenceFont, h: false, n: false },
+    //   // Possible Fourth Line
+    //   { t: (uncontestedSeats ? 'were left uncontested.**' : ''), s: sentenceFont, h: false, n: true },
+    // ];
 
-    context.strokeStyle = annotationColor;
-    context.fillStyle = annotationColor;
-    context.lineWidth = 2;
-    context.textAlign = 'center';
-    context.font = annotationFont;
-    context.textBaseline = 'hanging';
-    context.globalAlpha = 0.5;
+    // // Write the context sentence
+    // var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, election.parties[advantageParty].color, 48);
+    // mainSentenceContent.map(function(phrase) {
+    //   mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
+    // });
 
-    if (uncontested[0] >= 1) {
-      context.beginPath();
-      context.moveTo(seatScale(Chamber.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline);
-      context.lineTo(seatScale(Chamber.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline + 15);
-      context.lineTo(seatScale(Chamber.seats) + seatRectangleWidth / 2, uncontestedBaseline + 15);
-      context.lineTo(seatScale(Chamber.seats) + seatRectangleWidth / 2, uncontestedBaseline);
-      context.stroke();
-      context.closePath();
 
-      context.fillText('uncontested', seatScale(Chamber.seats - (uncontested[0] - 1) / 2) + seatRectangleWidth / 2, uncontestedBaseline + 20);
-    };
+    // // Explanation
+    // var explanationSentenceContent = [
+    //   {
+    //     t: ' * The "efficiency gap" measures how effectively a party\'s votes ',
+    //     s: disclaimerFont, h: false, n: false },
+    //     {
+    //       t: '    are distributed among districts and reveals partisan bias.',
+    //       s: disclaimerFont, h: false, n: true }
+    // ];
 
-    if (uncontested[1] >= 1) {
-      context.beginPath();
-      context.moveTo(seatScale(1) + seatRectangleWidth / 2, uncontestedBaseline);
-      context.lineTo(seatScale(1) + seatRectangleWidth / 2, uncontestedBaseline + 15);
-      context.lineTo(seatScale(uncontested[1]) + seatRectangleWidth / 2, uncontestedBaseline + 15);
-      context.lineTo(seatScale(uncontested[1]) + seatRectangleWidth / 2, uncontestedBaseline);
-      context.stroke();
-      context.closePath();
+    // var explanationSentence = new Sentence(leftMargin * 4, uncontestedSeats ? Math.ceil(grid * 8.5) : height - leftMargin * 0.8, disclaimerFont, annotationColor, 18);
+    // explanationSentenceContent.map(function(phrase) {
+    //   explanationSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
+    // });
 
-      context.fillText('uncontested', seatScale(1 + (uncontested[1] - 1) / 2) + seatRectangleWidth / 2, uncontestedBaseline + 20);
-    };
-    context.textBaseline = 'alphabetic';
-    context.globalAlpha = 1.0;
+    // // Disclaimers
+    // if (uncontestedSeats) {
+    //   var estimateDisclaimerSentenceContent = [
+    //     {
+    //       t: '** This efficiency gap score assumes an opponent would have won',
+    //       s: disclaimerFont, h: false, n: false },
+    //     {
+    //       t: '    25% of the vote in uncontested seats.',
+    //       s: disclaimerFont, h: false, n: true }
+    //   ];
+
+    //   var estimateDisclaimerSentence = new Sentence(leftMargin * 4, height - leftMargin * 0.8, disclaimerFont, annotationColor, 18);
+    //   estimateDisclaimerSentenceContent.map(function(phrase) {
+    //     estimateDisclaimerSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
+    //   });
+    // }
+
+    // // Bar graph
+    // var voteRectangleBaseline = Math.floor(graphOriginY + graphHeight * (1/3)),
+    //     seatRectangleBaseline = Math.ceil(graphOriginY + graphHeight * (2/3));
+
+    // var votes = Chamber.voteResults,
+    //     seats = Chamber.seatResults;
+
+    // voteScale = d3.scaleLinear()
+    //   .domain([0, votes[0] + votes[1]])
+    //   .range([0, graphWidth]);
+
+    // var seatRectangleMargin = 4,
+    //     seatRectangleWidth = Math.floor(graphWidth / Chamber.seats) - seatRectangleMargin;
+
+    // seatScale = d3.scaleLinear()
+    //   .domain([1, Chamber.seats])
+    //   .range([
+    //     graphOriginX + 2,
+    //     (graphOriginX + graphWidth) - Math.floor((graphWidth / Chamber.seats)) + seatRectangleMargin
+    //   ]);
+
+    // context.font = annotationFont;
+
+    // //// Draw rectangles for votes
+    // if (votes[0] >= 1) {
+    //   // Left Party
+    //   //// shadow
+    //   context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
+    //   context.fillRect(graphOriginX + 1, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+    //   //// highlight
+    //   context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
+    //   context.fillRect(graphOriginX + 3, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+    //   //// fill
+    //   context.fillStyle = election.parties.left.color;
+    //   context.fillRect(graphOriginX + 2, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+
+    //   context.fillText(Math.round(votes[0] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.left.name + ' vote', graphOriginX, voteRectangleBaseline - annotationMargin);
+
+    // }
+
+    // if (votes[1] >= 1) {
+    //   // Right Party
+    //   //// shadow
+    //   context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
+    //   context.fillRect(graphOriginX + voteScale(votes[0]) + 2, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);    //// highlight
+    //   //// highlight
+    //   context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
+    //   context.fillRect(graphOriginX + voteScale(votes[0]) + 4, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);    //// fill
+    //   //// fill
+    //   context.fillStyle = election.parties.right.color;
+    //   context.fillRect(graphOriginX + voteScale(votes[0]) + 3, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);
+
+    //   context.textAlign = 'end';
+    //   context.fillText(Math.round(votes[1] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.right.name + ' vote', graphOriginX + graphWidth, voteRectangleBaseline - annotationMargin);
+    //   context.textAlign = 'start';
+    // }
+
+    // //// Draw rectangles for seats
+    // for (var s = 1; s <= Chamber.seats; s++) {
+    //   var seatColor = s <= Chamber.seatResults[0] ? election.parties.left.color : election.parties.right.color;
+
+    //   // shadow
+    //   context.fillStyle = d3.color(seatColor).darker(1).toString();
+    //   context.fillRect(seatScale(s) - 1,seatRectangleBaseline, seatRectangleWidth, rectangleHeight);
+
+    //   // highlight
+    //   context.fillStyle = d3.color(seatColor).brighter(1).toString();
+    //   context.fillRect(seatScale(s) + 1,seatRectangleBaseline, seatRectangleWidth, rectangleHeight);
+
+    //   // fill
+    //   context.fillStyle = seatColor;
+    //   context.fillRect(seatScale(s), seatRectangleBaseline, seatRectangleWidth, rectangleHeight);
+    // }
+
+    // if (seats[0] >= 1) {
+    //   context.fillStyle = election.parties.left.color;
+    //   context.fillText(seats[0] + ' ' + election.parties.left.name + ' ' + (seats[0] === 1 ? 'seat' : 'seats'), graphOriginX, seatRectangleBaseline - annotationMargin);
+    // }
+    // if (seats[1] >= 1) {
+    //   context.fillStyle = election.parties.right.color;
+    //   context.textAlign = 'end';
+    //   context.fillText(seats[1] + ' ' + election.parties.right.name + ' ' + (seats[1] === 1 ? 'seat' : 'seats'), graphOriginX + graphWidth, seatRectangleBaseline - annotationMargin);
+    //   context.textAlign = 'start';
+    // }
+
+
+    // // Uncontested races
+    // var uncontestedBaseline = seatRectangleBaseline + rectangleHeight + seatRectangleMargin;
+
+    // context.strokeStyle = annotationColor;
+    // context.fillStyle = annotationColor;
+    // context.lineWidth = 2;
+    // context.textAlign = 'center';
+    // context.font = annotationFont;
+    // context.textBaseline = 'hanging';
+    // context.globalAlpha = 0.5;
+
+    // if (uncontested[0] >= 1) {
+    //   context.beginPath();
+    //   context.moveTo(seatScale(Chamber.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline);
+    //   context.lineTo(seatScale(Chamber.seats - uncontested[0] + 1) + seatRectangleWidth / 2, uncontestedBaseline + 15);
+    //   context.lineTo(seatScale(Chamber.seats) + seatRectangleWidth / 2, uncontestedBaseline + 15);
+    //   context.lineTo(seatScale(Chamber.seats) + seatRectangleWidth / 2, uncontestedBaseline);
+    //   context.stroke();
+    //   context.closePath();
+
+    //   context.fillText('uncontested', seatScale(Chamber.seats - (uncontested[0] - 1) / 2) + seatRectangleWidth / 2, uncontestedBaseline + 20);
+    // };
+
+    // if (uncontested[1] >= 1) {
+    //   context.beginPath();
+    //   context.moveTo(seatScale(1) + seatRectangleWidth / 2, uncontestedBaseline);
+    //   context.lineTo(seatScale(1) + seatRectangleWidth / 2, uncontestedBaseline + 15);
+    //   context.lineTo(seatScale(uncontested[1]) + seatRectangleWidth / 2, uncontestedBaseline + 15);
+    //   context.lineTo(seatScale(uncontested[1]) + seatRectangleWidth / 2, uncontestedBaseline);
+    //   context.stroke();
+    //   context.closePath();
+
+    //   context.fillText('uncontested', seatScale(1 + (uncontested[1] - 1) / 2) + seatRectangleWidth / 2, uncontestedBaseline + 20);
+    // };
+    // context.textBaseline = 'alphabetic';
+    // context.globalAlpha = 1.0;
 
     // Azavea Logo
     
@@ -659,6 +709,6 @@ function report(election) {
     process.stdout.write(Chamber.name + ': ' + Math.round(Chamber.efficiencyGapImputation * 100) / 100 + '\n');
 
     // Save image to the output directory
-    //canvas.pngStream().pipe(fs.createWriteStream(config.outputDirectory + '/' + Chamber.name + ".png"));
+    canvas.pngStream().pipe(fs.createWriteStream(config.outputDirectory + '/' + Chamber.name + ".png"));
   }
 }
