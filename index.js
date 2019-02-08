@@ -572,16 +572,16 @@ function report(election) {
     //   });
     // }
 
-    // // Bar graph
-    // var voteRectangleBaseline = Math.floor(graphOriginY + graphHeight * (1/3)),
-    //     seatRectangleBaseline = Math.ceil(graphOriginY + graphHeight * (2/3));
+    // Bar graph
+    var voteRectangleBaseline = Math.floor(graphOriginY + graphHeight * (1/3))
+        //seatRectangleBaseline = Math.ceil(graphOriginY + graphHeight * (2/3));
 
-    // var votes = Chamber.voteResults,
-    //     seats = Chamber.seatResults;
+    var seats = Chamber.stats.official_count
+        //seats = Chamber.seatResults;
 
-    // voteScale = d3.scaleLinear()
-    //   .domain([0, votes[0] + votes[1]])
-    //   .range([0, graphWidth]);
+    voteScale = d3.scaleLinear()
+      .domain([0, seats])
+      .range([0, graphWidth]);
 
     // var seatRectangleMargin = 4,
     //     seatRectangleWidth = Math.floor(graphWidth / Chamber.seats) - seatRectangleMargin;
@@ -596,21 +596,20 @@ function report(election) {
     // context.font = annotationFont;
 
     // //// Draw rectangles for votes
-    // if (votes[0] >= 1) {
-    //   // Left Party
-    //   //// shadow
-    //   context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
-    //   context.fillRect(graphOriginX + 1, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
-    //   //// highlight
-    //   context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
-    //   context.fillRect(graphOriginX + 3, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
-    //   //// fill
-    //   context.fillStyle = election.parties.left.color;
-    //   context.fillRect(graphOriginX + 2, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+   
+      // Left Party
+      //// shadow
+      context.fillStyle = d3.color(election.leftparty.color).darker(1).toString();
+      context.fillRect(graphOriginX + 1, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+      //// highlight
+      context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
+      context.fillRect(graphOriginX + 3, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+      //// fill
+      context.fillStyle = election.parties.left.color;
+      context.fillRect(graphOriginX + 2, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
 
-    //   context.fillText(Math.round(votes[0] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.left.name + ' vote', graphOriginX, voteRectangleBaseline - annotationMargin);
+      context.fillText(Math.round(votes[0] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.left.name + ' vote', graphOriginX, voteRectangleBaseline - annotationMargin);
 
-    // }
 
     // if (votes[1] >= 1) {
     //   // Right Party
