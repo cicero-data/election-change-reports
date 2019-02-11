@@ -27,7 +27,7 @@ partyLeftName: 'Democratic'
 # Name of second party (right)
 partyRightName: 'Republican'
 # Name of other party 
-partyRightName: 'Other'
+partyOtherName: 'Other'
 
 
 # GeoJSON file with district boundaries

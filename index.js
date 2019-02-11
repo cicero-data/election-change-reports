@@ -236,6 +236,7 @@ class ElectionResults {
 // ChangeReport: the report for a set of Chambers from an election between a left-Party and a right-Party
 class ChangeReport {
   constructor(leftParty, rightParty, otherParty, Chambers) {
+    console.log( 'make change report!! ' )
     this.parties = { left: leftParty, right: rightParty, other: otherParty };
     this.Chambers = Chambers;
   }
@@ -274,7 +275,6 @@ csv(csvData, { columns: true }, function(err,data) {
       });
       
 
-      console.log( 'this chamber --> ', ChamberIdentifier )
 
       var chamberLocalPoint = geojsonLocalCent.features.find(function(f) {
            return f.properties['id'] === ChamberIdentifier;
@@ -289,7 +289,7 @@ csv(csvData, { columns: true }, function(err,data) {
       collectedChambers.push(new Chamber(ChamberName, ChamberIdentifier, chamberGeometry, chamberLocalPoint, d, []))
     }
 
-    var ChamberIndex = ChamberIdentifiers.indexOf(ChamberIdentifier);
+    //var ChamberIndex = ChamberIdentifiers.indexOf(ChamberIdentifier);
 
     // Add new district
     //var districtIdentifier = d[config.districtIdentifier];
@@ -307,7 +307,15 @@ csv(csvData, { columns: true }, function(err,data) {
   var dataOtherParty = new Party(config.partyOtherName, '#d3d3d3');
 
 
+  console.log( 'PARTY --> ', dataLeftParty.color )
+  console.log( 'PARTY --> ', dataRightParty.color )
+  console.log( 'PARTY --> ', dataOtherParty.color )
+
+
   var results = new ChangeReport(dataLeftParty, dataRightParty, dataOtherParty, collectedChambers);
+
+  console.log( 'this results --> ', results.parties.left.color )
+
 
   // Generate infographics
   report(results);
@@ -318,13 +326,10 @@ function report(election) {
 
   // Generate a report for each Chamber
   //for (var i = 0; i < election.Chambers.length; i++) {
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 15; i++) {
     var Chamber = election.Chambers[i];
 
     //console.log( 'new officials --> ', Chamber.new_officials())
-
-    console.log( 'new officials --> ', Chamber );
-
 
     //var districts = Chamber.districtBoundaries;
     var geometry = Chamber.geometry;
@@ -573,18 +578,25 @@ function report(election) {
     // }
 
     // Bar graph
-    var voteRectangleBaseline = Math.floor(graphOriginY + graphHeight * (1/3))
-        //seatRectangleBaseline = Math.ceil(graphOriginY + graphHeight * (2/3));
+    var voteRectangleBaseline = [Math.floor(graphOriginY + graphHeight * (1/4)),
+                                 Math.ceil(graphOriginY + graphHeight * (1/2)),
+                                 Math.ceil(graphOriginY + graphHeight * (3/4)),
+                                 Math.ceil(graphOriginY + graphHeight * (7/8))]
 
-    var seats = Chamber.stats.official_count
+    //var votes = Chamber.voteResults,
         //seats = Chamber.seatResults;
 
+    var cvotes = [ parseInt(Chamber.stats.cdem_tot) , parseInt(Chamber.stats.crep_tot)]
+    var ovotes = [ parseInt(Chamber.stats.odem_tot) , parseInt(Chamber.stats.orep_tot)]
+
+    //console.log( 'votes', votes, typeof votes[0],  typeof votes[1] )
+
     voteScale = d3.scaleLinear()
-      .domain([0, seats])
+      .domain([0, Chamber.stats.official_count ])
       .range([0, graphWidth]);
 
-    // var seatRectangleMargin = 4,
-    //     seatRectangleWidth = Math.floor(graphWidth / Chamber.seats) - seatRectangleMargin;
+    //var seatRectangleMargin = 4,
+    //    seatRectangleWidth = Math.floor(graphWidth / Chamber.seats) - seatRectangleMargin;
 
     // seatScale = d3.scaleLinear()
     //   .domain([1, Chamber.seats])
@@ -593,42 +605,120 @@ function report(election) {
     //     (graphOriginX + graphWidth) - Math.floor((graphWidth / Chamber.seats)) + seatRectangleMargin
     //   ]);
 
-    // context.font = annotationFont;
+    context.font = annotationFont;
 
-    // //// Draw rectangles for votes
-   
+    //// Draw rectangles for votes in current session
+    if (cvotes[0] >= 1) {
       // Left Party
       //// shadow
-      context.fillStyle = d3.color(election.leftparty.color).darker(1).toString();
-      context.fillRect(graphOriginX + 1, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+      context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
+      context.fillRect(graphOriginX + 1, voteRectangleBaseline[0], voteScale(cvotes[0]) - 4, rectangleHeight);
       //// highlight
       context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
-      context.fillRect(graphOriginX + 3, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 3, voteRectangleBaseline[0], voteScale(cvotes[0]) - 4, rectangleHeight);
       //// fill
       context.fillStyle = election.parties.left.color;
-      context.fillRect(graphOriginX + 2, voteRectangleBaseline, voteScale(votes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 2, voteRectangleBaseline[0], voteScale(cvotes[0]) - 4, rectangleHeight);
 
-      context.fillText(Math.round(votes[0] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.left.name + ' vote', graphOriginX, voteRectangleBaseline - annotationMargin);
+      context.fillText(Math.round(cvotes[0] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.left.name +
+       ' vote', graphOriginX, voteRectangleBaseline[0] - annotationMargin);
+
+    }
+
+    if (cvotes[1] >= 1) {
+      // Right Party
+      //// shadow
+      context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 2, voteRectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// highlight
+      //// highlight
+      context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 4, voteRectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// fill
+      //// fill
+      context.fillStyle = election.parties.right.color;
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 3, voteRectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);
+
+      context.textAlign = 'end';
+      context.fillText(Math.round(cvotes[1] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.right.name + 
+        ' vote', graphOriginX + graphWidth, voteRectangleBaseline[0] - annotationMargin);
+      context.textAlign = 'start';
+    }
+
+    //// Draw rectangles for votes in previous session
+    if (ovotes[0] >= 1) {
+      // Left Party
+      //// shadow
+      context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
+      context.fillRect(graphOriginX + 1, voteRectangleBaseline[1], voteScale(ovotes[0]) - 4, rectangleHeight);
+      //// highlight
+      context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
+      context.fillRect(graphOriginX + 3, voteRectangleBaseline[1], voteScale(ovotes[0]) - 4, rectangleHeight);
+      //// fill
+      context.fillStyle = election.parties.left.color;
+      context.fillRect(graphOriginX + 2, voteRectangleBaseline[1], voteScale(ovotes[0]) - 4, rectangleHeight);
+
+      context.fillText(Math.round(ovotes[0] / (ovotes[0] + ovotes[1]) * 100) + '% ' + election.parties.left.name +
+       ' vote', graphOriginX, voteRectangleBaseline[1] - annotationMargin);
+
+    }
+
+    if (ovotes[1] >= 1) {
+      // Right Party
+      //// shadow
+      context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 2, voteRectangleBaseline[1], voteScale(ovotes[1]) - 4, rectangleHeight);    //// highlight
+      //// highlight
+      context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 4, voteRectangleBaseline[1], voteScale(ovotes[1]) - 4, rectangleHeight);    //// fill
+      //// fill
+      context.fillStyle = election.parties.right.color;
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 3, voteRectangleBaseline[1], voteScale(ovotes[1]) - 4, rectangleHeight);
+
+      context.textAlign = 'end';
+      context.fillText(Math.round(ovotes[1] / (ovotes[0] + ovotes[1]) * 100) + '% ' + election.parties.right.name + 
+        ' vote', graphOriginX + graphWidth, voteRectangleBaseline[1] - annotationMargin);
+      context.textAlign = 'start';
+    }
 
 
-    // if (votes[1] >= 1) {
-    //   // Right Party
-    //   //// shadow
-    //   context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
-    //   context.fillRect(graphOriginX + voteScale(votes[0]) + 2, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);    //// highlight
-    //   //// highlight
-    //   context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
-    //   context.fillRect(graphOriginX + voteScale(votes[0]) + 4, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);    //// fill
-    //   //// fill
-    //   context.fillStyle = election.parties.right.color;
-    //   context.fillRect(graphOriginX + voteScale(votes[0]) + 3, voteRectangleBaseline, voteScale(votes[1]) - 4, rectangleHeight);
 
-    //   context.textAlign = 'end';
-    //   context.fillText(Math.round(votes[1] / (votes[0] + votes[1]) * 100) + '% ' + election.parties.right.name + ' vote', graphOriginX + graphWidth, voteRectangleBaseline - annotationMargin);
-    //   context.textAlign = 'start';
-    // }
+      // Right Party
+      //// shadow
+      // context.fillStyle = d3.color(ptbackground).darker(1).toString();
+      // context.fillRect(graphOriginX + 50 + 2, voteRectangleBaseline[2], 200 - 4, rectangleHeight);    //// highlight
+      // //// highlight
+      // context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
+      // context.fillRect(graphOriginX + 50 + 4, voteRectangleBaseline[2], 200 - 4, rectangleHeight);    //// fill
+      // //// fill
+      // context.fillStyle = election.parties.right.color;
+      // context.fillRect(graphOriginX + 50 + 3, voteRectangleBaseline[2], 200 - 4, rectangleHeight);
 
-    // //// Draw rectangles for seats
+      context.fillStyle = ptbackground;
+      context.textAlign = 'end';
+      context.fillText(Math.round(Chamber.stats.emai_tot / (Chamber.stats.official_count) * 100) + '% Email ', 
+        graphOriginX + graphWidth * (1/2), voteRectangleBaseline[2] - annotationMargin);
+      context.textAlign = 'start';
+    
+
+      context.textAlign = 'end';
+      context.fillText(Math.round(Chamber.stats.wfor_tot / (Chamber.stats.official_count) * 100) + '% Webform ', 
+        graphOriginX + graphWidth, voteRectangleBaseline[2] - annotationMargin);
+      context.textAlign = 'start';
+
+      context.textAlign = 'end';
+      context.fillText(Math.round(Chamber.stats.yfcb_tot / (Chamber.stats.official_count) * 100) + '% Facebook ', 
+        graphOriginX + graphWidth * (1/2), voteRectangleBaseline[3] - annotationMargin);
+      context.textAlign = 'start';
+
+      context.textAlign = 'end';
+      context.fillText(Math.round(Chamber.stats.ytwi_tot / (Chamber.stats.official_count) * 100) + '% Twitter ', 
+        graphOriginX + graphWidth , voteRectangleBaseline[3] - annotationMargin);
+      context.textAlign = 'start';
+
+
+
+
+
+    //// Draw rectangles for seats
     // for (var s = 1; s <= Chamber.seats; s++) {
     //   var seatColor = s <= Chamber.seatResults[0] ? election.parties.left.color : election.parties.right.color;
 
@@ -693,6 +783,7 @@ function report(election) {
     // };
     // context.textBaseline = 'alphabetic';
     // context.globalAlpha = 1.0;
+
 
     // Azavea Logo
     
