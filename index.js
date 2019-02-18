@@ -377,7 +377,7 @@ function report(election) {
     var graphWidth = width / 2 - leftMargin,
         graphHeight = 360,
         graphOriginX = leftMargin,
-        graphOriginY = Math.floor(grid * 3),
+        graphOriginY = Math.floor(grid * 3.5),
         rectangleHeight = Math.round(graphHeight * 0.10);
 
     // Map
@@ -486,7 +486,7 @@ function report(election) {
           var textFill = context.fillStyle;
           context.fillStyle = this.highlightColor;
           context.globalAlpha = 0.35;
-          context.fillRect(this.xPosition - 5, this.yPosition - 32, context.measureText(text).width + 10, 46);
+          context.fillRect(this.xPosition - 5, this.yPosition - 24, context.measureText(text).width + 10, 34);
           context.fillStyle = textFill;
           context.globalAlpha = 1.0;
         }
@@ -518,7 +518,7 @@ function report(election) {
     ];
 
     // Write the new officials sentence
-    var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, '#bfff80'  , 48);
+    var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, '#bfff80'  , 34);
     mainSentenceContent.map(function(phrase) {
       mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
     });
