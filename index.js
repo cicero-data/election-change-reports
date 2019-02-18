@@ -365,8 +365,8 @@ function report(election) {
         titleFont = 'bold 42px Helvetica',
         subtitleFont = '34px Helvetica',
         sentenceFill = '#fff',
-        sentenceFont = '34px Helvetica',
-        sentenceBoldFont = 'bold 34px Helvetica',
+        sentenceFont = '24px Helvetica',
+        sentenceBoldFont = 'bold 24px Helvetica',
         annotationFont = 'bold 20px Helvetica',
         annotationMargin = 10,
         disclaimerFont = '15px Helvetica',
@@ -375,10 +375,10 @@ function report(election) {
 
     // Bar Graph
     var graphWidth = width / 2 - leftMargin,
-        graphHeight = 260,
+        graphHeight = 360,
         graphOriginX = leftMargin,
-        graphOriginY = Math.floor(grid * 4),
-        rectangleHeight = Math.round(graphHeight * 0.15);
+        graphOriginY = Math.floor(grid * 3),
+        rectangleHeight = Math.round(graphHeight * 0.10);
 
     // Map
     var mapWidth = width * 0.44,
@@ -455,7 +455,7 @@ function report(election) {
     var titleWidth = context.measureText(titleText).width;
 
     // Subtitle
-    var subtitleText = '(elected 2016)';
+    var subtitleText = 'Cicero database 2019 coverage';
     context.font = subtitleFont;
     context.textAlign = 'end';
     context.globalAlpha = 0.35;
@@ -509,8 +509,12 @@ function report(election) {
     var mainSentenceContent = [
       // First Line
       //{ t: 'The ', s: sentenceFont, h: false, n: false },
-      { t: 'New Officials: ' + (Chamber.stats.official_count - Chamber.stats.retu_tot ) + ' out of ' + Chamber.stats.official_count, s: sentenceBoldFont, h: true, n: false },
-      
+      { t: (Chamber.stats.official_count - Chamber.stats.retu_tot ), s: sentenceBoldFont, h: true, n: false },
+      { t: ' out of ' , s: sentenceBoldFont, h: false, n: false},
+      { t: (Chamber.stats.official_count) , s: sentenceBoldFont, h: true, n: false},
+      { t: ' members serving in the ', s: sentenceBoldFont, h: false, n: false },
+      { t: Chamber.name, s: sentenceBoldFont, h: true, n: true },
+      { t: 'are new to office following the November 6, 2018 elections.', s: sentenceBoldFont, h: false, n: true },
     ];
 
     // Write the new officials sentence
@@ -518,6 +522,27 @@ function report(election) {
     mainSentenceContent.map(function(phrase) {
       mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
     });
+
+    // var mainSentenceContent = [
+    //   // First Line
+    //   { t: 'The ', s: sentenceFont, h: false, n: false },
+    //   { t: election.parties[advantageParty].name + ' Party', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
+    //   { t: ' had a', s: sentenceFont, h: false, n: false },
+    //   // Second Line
+    //   { t: efficiencyGapPercent + ' efficiency gap advantage*', s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: true },
+    //   // Third Line
+    //   { t: 'worth ', s: sentenceFont, h: false, n: true },
+    //   { t: Math.abs(Chamber.efficiencyGapSeatsImputation) + ' extra ' + (Chamber.efficiencyGapSeatsImputation === 1 ? 'seat' : 'seats'), s: sentenceBoldFont, h: !uncontestedSeats && significantAdvantage, n: false },
+    //   { t: (uncontestedSeats ? ', but some seats' : '.'), s: sentenceFont, h: false, n: false },
+    //   // Possible Fourth Line
+    //   { t: (uncontestedSeats ? 'were left uncontested.**' : ''), s: sentenceFont, h: false, n: true },
+    // ];
+
+    // // Write the context sentence
+    // var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, election.parties[advantageParty].color, 48);
+    // mainSentenceContent.map(function(phrase) {
+    //   mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
+    // });
 
 
 
@@ -578,16 +603,33 @@ function report(election) {
     // }
 
     // Bar graph
-    var voteRectangleBaseline = [Math.floor(graphOriginY + graphHeight * (1/4)),
+    var VoteRectangleBaseline = [Math.floor(graphOriginY + graphHeight * (1/4)),
                                  Math.ceil(graphOriginY + graphHeight * (1/2)),
                                  Math.ceil(graphOriginY + graphHeight * (3/4)),
                                  Math.ceil(graphOriginY + graphHeight * (7/8))]
 
+    var rectangleBaseline =  {
+        c_ch_l: Math.floor(graphOriginY + graphHeight * (2/16) ),
+        c_ch_b: Math.floor(graphOriginY + graphHeight * (3/16)),
+        o_ch_l: Math.floor(graphOriginY + graphHeight * (7/16)),
+        o_ch_b: Math.floor(graphOriginY + graphHeight * (1/2)),
+        sm_t: Math.floor(graphOriginY + graphHeight * (3/4)),
+        sm_b: Math.floor(graphOriginY + graphHeight * (7/8))
+    }
+    console.log( "doop ",  rectangleBaseline.c_ch_b )
+
+    // [Math.floor(graphOriginY + graphHeight * (1/4)),
+    //                              Math.ceil(graphOriginY + graphHeight * (1/2)),
+    //                              Math.ceil(graphOriginY + graphHeight * (3/4)),
+    //                              Math.ceil(graphOriginY + graphHeight * (7/8))]
+
     //var votes = Chamber.voteResults,
         //seats = Chamber.seatResults;
 
-    var cvotes = [ parseInt(Chamber.stats.cdem_tot) , parseInt(Chamber.stats.crep_tot)]
-    var ovotes = [ parseInt(Chamber.stats.odem_tot) , parseInt(Chamber.stats.orep_tot)]
+    var cvotes = [ parseInt(Chamber.stats.cdem_tot) , parseInt(Chamber.stats.crep_tot), 
+            parseInt(Chamber.stats.official_count)]
+    var ovotes = [ parseInt(Chamber.stats.odem_tot) , parseInt(Chamber.stats.orep_tot),
+            parseInt(Chamber.stats.official_count)]
 
     //console.log( 'votes', votes, typeof votes[0],  typeof votes[1] )
 
@@ -605,23 +647,30 @@ function report(election) {
     //     (graphOriginX + graphWidth) - Math.floor((graphWidth / Chamber.seats)) + seatRectangleMargin
     //   ]);
 
+    console.log( 'current --> ', cvotes[0], cvotes[1], cvotes[0]+ cvotes[1] +cvotes[2] , Chamber.stats.official_count  )
+    console.log( 'old --> ', ovotes[0], ovotes[1], ovotes[0]+ ovotes[1]+ovotes[2], Chamber.stats.official_count  )
+
+
     context.font = annotationFont;
 
     //// Draw rectangles for votes in current session
+
+    context.fillText('Current Legislative Term', graphOriginX, rectangleBaseline.c_ch_l - annotationMargin);
+
     if (cvotes[0] >= 1) {
       // Left Party
       //// shadow
       context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
-      context.fillRect(graphOriginX + 1, voteRectangleBaseline[0], voteScale(cvotes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 1, rectangleBaseline.c_ch_b, voteScale(cvotes[0]) - 4, rectangleHeight);
       //// highlight
       context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
-      context.fillRect(graphOriginX + 3, voteRectangleBaseline[0], voteScale(cvotes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 3, rectangleBaseline.c_ch_b, voteScale(cvotes[0]) - 4, rectangleHeight);
       //// fill
       context.fillStyle = election.parties.left.color;
-      context.fillRect(graphOriginX + 2, voteRectangleBaseline[0], voteScale(cvotes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 2, rectangleBaseline.c_ch_b, voteScale(cvotes[0]) - 4, rectangleHeight);
 
-      context.fillText(Math.round(cvotes[0] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.left.name +
-       ' vote', graphOriginX, voteRectangleBaseline[0] - annotationMargin);
+      context.fillText(cvotes[2] - ((cvotes[0] + cvotes[1])) + ' / '  + cvotes[2] + ' ' + election.parties.left.name +
+       ' vote', graphOriginX, rectangleBaseline.c_ch_b - annotationMargin);
 
     }
 
@@ -629,35 +678,55 @@ function report(election) {
       // Right Party
       //// shadow
       context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
-      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 2, voteRectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// highlight
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 2, rectangleBaseline.c_ch_b, voteScale(cvotes[1]) - 4, rectangleHeight);    //// highlight
       //// highlight
       context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
-      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 4, voteRectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// fill
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 4, rectangleBaseline.c_ch_b, voteScale(cvotes[1]) - 4, rectangleHeight);    //// fill
       //// fill
       context.fillStyle = election.parties.right.color;
-      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 3, voteRectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + 3, rectangleBaseline.c_ch_b, voteScale(cvotes[1]) - 4, rectangleHeight);
 
       context.textAlign = 'end';
       context.fillText(Math.round(cvotes[1] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.right.name + 
-        ' vote', graphOriginX + graphWidth, voteRectangleBaseline[0] - annotationMargin);
+        ' vote', graphOriginX + graphWidth, rectangleBaseline.c_ch_b - annotationMargin);
       context.textAlign = 'start';
     }
 
+    if (cvotes[2] >= 1) {
+      // Other Party
+      //// shadow
+      //context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
+      //context.fillRect(graphOriginX + voteScale(cvotes[0]) + 2, rectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// highlight
+      //// highlight
+      //context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
+      //context.fillRect(graphOriginX + voteScale(cvotes[0]) + 4, rectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// fill
+      //// fill
+      context.fillStyle = election.parties.other.color;
+      context.fillRect(graphOriginX + voteScale(cvotes[0]) + voteScale(cvotes[1]) + 3, rectangleBaseline.c_ch_b, voteScale(cvotes[2] - (cvotes[0] + cvotes[1]) ) - 4, rectangleHeight);
+
+      //context.textAlign = 'end';
+      //context.fillText(Math.round(cvotes[1] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.right.name + 
+      //  ' vote', graphOriginX + graphWidth, rectangleBaseline[0] - annotationMargin);
+      //context.textAlign = 'start';
+    }
+
     //// Draw rectangles for votes in previous session
+    context.fillText('Previous Legislative Term', graphOriginX, rectangleBaseline.o_ch_l - annotationMargin);
+
     if (ovotes[0] >= 1) {
       // Left Party
       //// shadow
       context.fillStyle = d3.color(election.parties.left.color).darker(1).toString();
-      context.fillRect(graphOriginX + 1, voteRectangleBaseline[1], voteScale(ovotes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 1, rectangleBaseline.o_ch_b, voteScale(ovotes[0]) - 4, rectangleHeight);
       //// highlight
       context.fillStyle = d3.color(election.parties.left.color).brighter(1).toString();
-      context.fillRect(graphOriginX + 3, voteRectangleBaseline[1], voteScale(ovotes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 3, rectangleBaseline.o_ch_b, voteScale(ovotes[0]) - 4, rectangleHeight);
       //// fill
       context.fillStyle = election.parties.left.color;
-      context.fillRect(graphOriginX + 2, voteRectangleBaseline[1], voteScale(ovotes[0]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + 2, rectangleBaseline.o_ch_b, voteScale(ovotes[0]) - 4, rectangleHeight);
 
       context.fillText(Math.round(ovotes[0] / (ovotes[0] + ovotes[1]) * 100) + '% ' + election.parties.left.name +
-       ' vote', graphOriginX, voteRectangleBaseline[1] - annotationMargin);
+       ' vote', graphOriginX, rectangleBaseline.o_ch_b - annotationMargin);
 
     }
 
@@ -665,18 +734,36 @@ function report(election) {
       // Right Party
       //// shadow
       context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
-      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 2, voteRectangleBaseline[1], voteScale(ovotes[1]) - 4, rectangleHeight);    //// highlight
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 2, rectangleBaseline.o_ch_b, voteScale(ovotes[1]) - 4, rectangleHeight);    //// highlight
       //// highlight
       context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
-      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 4, voteRectangleBaseline[1], voteScale(ovotes[1]) - 4, rectangleHeight);    //// fill
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 4, rectangleBaseline.o_ch_b, voteScale(ovotes[1]) - 4, rectangleHeight);    //// fill
       //// fill
       context.fillStyle = election.parties.right.color;
-      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 3, voteRectangleBaseline[1], voteScale(ovotes[1]) - 4, rectangleHeight);
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + 3, rectangleBaseline.o_ch_b, voteScale(ovotes[1]) - 4, rectangleHeight);
 
       context.textAlign = 'end';
       context.fillText(Math.round(ovotes[1] / (ovotes[0] + ovotes[1]) * 100) + '% ' + election.parties.right.name + 
-        ' vote', graphOriginX + graphWidth, voteRectangleBaseline[1] - annotationMargin);
+        ' vote', graphOriginX + graphWidth, rectangleBaseline.o_ch_b - annotationMargin);
       context.textAlign = 'start';
+    }
+
+    if (cvotes[2] >= 1) {
+      // Other Party
+      //// shadow
+      //context.fillStyle = d3.color(election.parties.right.color).darker(1).toString();
+      //context.fillRect(graphOriginX + voteScale(cvotes[0]) + 2, rectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// highlight
+      //// highlight
+      //context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
+      //context.fillRect(graphOriginX + voteScale(cvotes[0]) + 4, rectangleBaseline[0], voteScale(cvotes[1]) - 4, rectangleHeight);    //// fill
+      //// fill
+      context.fillStyle = election.parties.other.color;
+      context.fillRect(graphOriginX + voteScale(ovotes[0]) + voteScale(ovotes[1]) + 3, rectangleBaseline.o_ch_b, voteScale(cvotes[2] - (ovotes[0] + ovotes[1]) ) - 4, rectangleHeight);
+
+      //context.textAlign = 'end';
+      //context.fillText(Math.round(cvotes[1] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.right.name + 
+      //  ' vote', graphOriginX + graphWidth, rectangleBaseline[0] - annotationMargin);
+      //context.textAlign = 'start';
     }
 
 
@@ -684,35 +771,63 @@ function report(election) {
       // Right Party
       //// shadow
       // context.fillStyle = d3.color(ptbackground).darker(1).toString();
-      // context.fillRect(graphOriginX + 50 + 2, voteRectangleBaseline[2], 200 - 4, rectangleHeight);    //// highlight
+      // context.fillRect(graphOriginX + 50 + 2, rectangleBaseline[2], 200 - 4, rectangleHeight);    //// highlight
       // //// highlight
       // context.fillStyle = d3.color(election.parties.right.color).brighter(1).toString();
-      // context.fillRect(graphOriginX + 50 + 4, voteRectangleBaseline[2], 200 - 4, rectangleHeight);    //// fill
+      // context.fillRect(graphOriginX + 50 + 4, rectangleBaseline[2], 200 - 4, rectangleHeight);    //// fill
       // //// fill
       // context.fillStyle = election.parties.right.color;
-      // context.fillRect(graphOriginX + 50 + 3, voteRectangleBaseline[2], 200 - 4, rectangleHeight);
+      // context.fillRect(graphOriginX + 50 + 3, rectangleBaseline[2], 200 - 4, rectangleHeight);
 
       context.fillStyle = ptbackground;
       context.textAlign = 'end';
       context.fillText(Math.round(Chamber.stats.emai_tot / (Chamber.stats.official_count) * 100) + '% Email ', 
-        graphOriginX + graphWidth * (1/2), voteRectangleBaseline[2] - annotationMargin);
+        graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_t - annotationMargin);
       context.textAlign = 'start';
+
+      var em_logo = fs.readFileSync('email.svg');
+      const em_image = new Image()
+      em_image.src = em_logo;
+      context.globalAlpha = 0.6;
+      context.drawImage(em_image, graphOriginX, rectangleBaseline.sm_t - annotationMargin - 20, 40,40);
+      context.globalAlpha = 1.0;
     
 
       context.textAlign = 'end';
       context.fillText(Math.round(Chamber.stats.wfor_tot / (Chamber.stats.official_count) * 100) + '% Webform ', 
-        graphOriginX + graphWidth, voteRectangleBaseline[2] - annotationMargin);
+        graphOriginX + graphWidth, rectangleBaseline.sm_t - annotationMargin);
       context.textAlign = 'start';
+
+      var wf_logo = fs.readFileSync('mail-bulk.svg');
+      const wf_image = new Image()
+      wf_image.src = wf_logo;
+      context.globalAlpha = 0.6;
+      context.drawImage(wf_image, graphOriginX + graphWidth * (1/2) , rectangleBaseline.sm_t - annotationMargin - 20, 40,40);
+      context.globalAlpha = 1.0;
 
       context.textAlign = 'end';
       context.fillText(Math.round(Chamber.stats.yfcb_tot / (Chamber.stats.official_count) * 100) + '% Facebook ', 
-        graphOriginX + graphWidth * (1/2), voteRectangleBaseline[3] - annotationMargin);
+        graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin);
       context.textAlign = 'start';
+
+      var fb_logo = fs.readFileSync('facebook-sq.svg');
+      const fb_image = new Image()
+      fb_image.src = fb_logo;
+      context.globalAlpha = 0.6;
+      context.drawImage(fb_image, graphOriginX, rectangleBaseline.sm_b - annotationMargin - 20, 40,40);
+      context.globalAlpha = 1.0;
 
       context.textAlign = 'end';
       context.fillText(Math.round(Chamber.stats.ytwi_tot / (Chamber.stats.official_count) * 100) + '% Twitter ', 
-        graphOriginX + graphWidth , voteRectangleBaseline[3] - annotationMargin);
+        graphOriginX + graphWidth , rectangleBaseline.sm_b - annotationMargin);
       context.textAlign = 'start';
+
+      var tw_logo = fs.readFileSync('twitter-sq.svg');
+      const tw_image = new Image()
+      tw_image.src = tw_logo;
+      context.globalAlpha = 0.6;
+      context.drawImage(tw_image, graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin - 20, 40,40);
+      context.globalAlpha = 1.0;
 
 
 
@@ -785,11 +900,8 @@ function report(election) {
     // context.globalAlpha = 1.0;
 
 
-    // Azavea Logo
-    
-
-
-    var logo = fs.readFileSync('data_analytics.png');
+    // Azavea Logo    
+    var logo = fs.readFileSync('cicero_light_sm.png');
     const image = new Image()
     image.src = logo;
     context.globalAlpha = 0.6;
