@@ -669,7 +669,7 @@ function report(election) {
       context.fillStyle = election.parties.left.color;
       context.fillRect(graphOriginX + 2, rectangleBaseline.c_ch_b, voteScale(cvotes[0]) - 4, rectangleHeight);
 
-      context.fillText(cvotes[2] - ((cvotes[0] + cvotes[1])) + ' / '  + cvotes[2] + ' ' + election.parties.left.name +
+      context.fillText( cvotes[0] + ' / '  + cvotes[2] + ' ' + election.parties.left.name +
        ' vote', graphOriginX, rectangleBaseline.c_ch_b - annotationMargin);
 
     }
@@ -912,5 +912,32 @@ function report(election) {
 
     // Save image to the output directory
     canvas.pngStream().pipe(fs.createWriteStream(config.outputDirectory + '/' + Chamber.name + ".png"));
+
+
+    //write html file
+
+    function buildHtml(req) {
+      var header = '';
+      var body = '';
+
+      // concatenate header string
+      // concatenate body string
+
+      return '<!DOCTYPE html>'
+           + '<html><head>' + header + '</head><body>' + body + '</body></html>';
+    };
+
+    var fs = require('fs');
+
+    var fileName = 'index.html';
+    var stream = fs.createWriteStream(fileName);
+
+    stream.once('open', function(fd) {
+      var html = buildHtml();
+
+      stream.end(html);
+    });
+
+
   }
 }

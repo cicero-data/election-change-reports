@@ -4,7 +4,8 @@
   "description": "Calculate and display partisan bias in a delegation's districts with efficiency gap scores.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reports": "node index.js"
+    "reports": "node index.js",
+    "html": "node html.js"
   },
   "keywords": [
     "elections",
