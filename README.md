@@ -14,11 +14,10 @@ A project of [Cicero Data](https://www.cicerodata.com/).
 
 Read more about the methods used in this project on the [Azavea Blog, "Leveraging Node.js, D3.js, and HTML Canvas for Scalable Infographics"](https://www.azavea.com/blog/2017/07/20/node-js-d3-canvas-scalable-graphics/).
 
-For more information about Azavea's redistricting work, read ["The Evolution of Azavea’s Redistricting and Gerrymandering Work"](https://www.azavea.com/blog/2017/07/18/the-evolution-of-azaveas-redistricting-and-gerrymandering-work/).
 
 ## Data
 
-This project is setup to generate reports on data of changes to legislative chambers between to dates. The file chamber-change.csv is the data used to generate reports.
+This project is setup to generate reports on data of changes to legislative chambers between two dates. The file chamber-change.csv is the data used to generate reports.
 
 
 ## Install
@@ -39,7 +38,7 @@ Edit `config.yml` to point to your election data.
 
 `npm run reports`
 
-Images for each delegation will be written to the `change-reports` directory.
+Images for each chamber will be written to the `change-reports` directory.
 
 ## Generate Static HTML Page
 
