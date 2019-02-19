@@ -62,7 +62,6 @@ class ElectionResults {
 // ChangeReport: the report for a set of Chambers from an election between a left-Party and a right-Party
 class ChangeReport {
   constructor(leftParty, rightParty, otherParty, Chambers) {
-    console.log( 'make change report!! ' )
     this.parties = { left: leftParty, right: rightParty, other: otherParty };
     this.Chambers = Chambers;
   }
