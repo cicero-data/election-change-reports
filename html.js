@@ -1,5 +1,3 @@
-    //write html file
-
     var fs = require('fs');
 
     function buildHtml(items) {
@@ -17,10 +15,11 @@
       for (var i=0; i<items.length; i++) {
           
           var label = items[i].substr(0, items[i].length-4);
-          //id="tagtojumpto"
 
-          var bi = '<div class="row"><div class="col-md-8 pb-4" id="'
-                   + label +'"><img class="img-fluid rounded" src="change-reports/'+ items[i] +'"></div></div>'
+          var bi = '<div class="row"><div class="col-md-8 pb-4"><p id="'
+                   + label +'"><a href="">#Back to Top</a></p>'
+                   +' <img class="img-fluid rounded" src="change-reports/'+ items[i] +'">'
+                   + '</div></div>'
           var ni = '<a href="#'+label+'"><li class="nav-item">'+ label +'</li></a>'
 
           b.push(bi);
@@ -29,14 +28,10 @@
       nav = n.join("")
       body = b.join("")
 
-      console.log(body)
-
-      // concatenate header string
-      // concatenate body string
-
 
       var html =  '<!DOCTYPE html>'
-           + '<html><head>' + header + '</head><body><div class="container-fluid"><div class="row">'
+           + '<html><head>' + header + '</head><body>'
+           + '<div class="container-fluid"><div class="row">'
            + '<nav class="col-md-3 d-none d-md-block bg-light sidebar">'
            + '<div class="sidebar-sticky"><ul class="nav flex-column">'
            + nav + '</ul></div></nav>'
@@ -61,7 +56,6 @@
 
     stream.once('open', function(fd) {
       var html =     getDirectories('change-reports/', function (err, content) {
-          console.log(content)
           var html = buildHtml(content)
           stream.end(html);
         }) 
