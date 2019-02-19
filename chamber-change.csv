@@ -3,11 +3,11 @@
 2665,"UT","administrativeArea1","Utah State Senate",29,"2 years","4 years",6,23,5,24,23,29,29,26,17
 1465,"MA","administrativeArea1","Massachusetts Senate",40,"2 years","2 years",34,6,31,7,35,3,40,38,34
 2447,"CO","administrativeArea1","Colorado House of Representatives",65,"2 years","2 years",41,24,36,29,40,5,65,63,35
-2445,"AR","administrativeArea1","Arkansas House of Representatives",100,"2 years","2 years",25,75,25,74,76,0,100,88,42
+2445,"AR","administrativeArea1","Arkansas House of Representatives",100,"2 years","2 years",25,75,25,74,75,0,100,88,42
 4309,"PA","administrativeArea1","Pennsylvania Senate",50,"2 years","4 years",21,28,16,33,42,44,47,46,44
 2474,"NC","administrativeArea1","North Carolina House of Representatives",120,"2 years","2 years",55,65,45,74,0,1,120,105,58
 4282,"TN","administrativeArea1","Tennessee State Senate",33,"2 years","4 years",5,26,5,27,27,1,31,30,19
-1468,"MI","administrativeArea1","Michigan State Senate",38,"4 years","4 years",16,22,10,27,9,24,35,36,19
+1468,"MI","administrativeArea1","Michigan State Senate",38,"4 years","4 years",16,22,10,27,8,24,35,36,19
 4598,"PR","administrativeArea1","Puerto Rico House of Representatives",51,"4 years","4 years",0,0,0,0,51,49,51,47,43
 4411,"NJ","administrativeArea1","New Jersey General Assembly",80,"2 years","2 years",54,26,54,26,79,79,0,62,48
 2663,"OK","administrativeArea1","Oklahoma Senate",48,"2 years","4 years",8,40,7,40,36,48,48,47,23
@@ -16,7 +16,7 @@
 2489,"WA","administrativeArea1","Washington House",98,"2 years","2 years",57,41,50,48,74,98,98,88,48
 2643,"KY","administrativeArea1","Kentucky House of Representatives",100,"2 years","2 years",40,60,37,63,68,63,50,84,59
 2473,"NY","administrativeArea1","New York State Assembly",150,"2 years","2 years",106,43,103,42,128,91,124,136,91
-4763,"DE","administrativeArea1","Delaware House of Representatives",41,"2 years","2 years",26,15,25,16,41,0,41,34,9
+4763,"DE","administrativeArea1","Delaware House of Representatives",41,"2 years","2 years",26,15,25,16,29,0,41,34,9
 2482,"SD","administrativeArea1","South Dakota House of Representatives",70,"2 years","2 years",11,59,10,60,46,0,70,54,6
 2291,"MD","administrativeArea1","Maryland State Senate",47,"4 years","4 years",32,15,33,14,30,47,45,43,30
 1551,"WI","administrativeArea1","Wisconsin State Senate",33,"2 years","4 years",14,19,15,18,29,24,33,29,25
@@ -33,15 +33,15 @@
 2491,"WI","administrativeArea1","Wisconsin Assembly",99,"2 years","2 years",35,63,35,64,83,70,98,92,68
 2647,"ND","administrativeArea1","North Dakota House of Representatives",94,"2 years","4 years",15,79,13,81,82,93,94,64,11
 1513,"OH","administrativeArea1","Ohio Senate",33,"2 years","4 years",9,24,9,23,21,33,11,31,24
-1442,"IN","administrativeArea1","Indiana State Senate",50,"2 years","4 years",10,40,9,41,50,12,50,44,28
+1442,"IN","administrativeArea1","Indiana State Senate",50,"2 years","4 years",10,40,9,41,45,12,50,44,28
 1543,"VT","administrativeArea1","Vermont Senate",30,"2 years","2 years",19,6,20,7,25,0,30,22,5
 2661,"TX","administrativeArea1","Texas House of Representatives",150,"2 years","2 years",65,83,55,93,119,148,121,140,104
 4499,"MN","administrativeArea1","Minnesota House of Representatives",134,"2 years","2 years",0,58,0,76,94,127,133,121,62
 1474,"MN","administrativeArea1","Minnesota State Senate",67,"4 years","4 years",0,35,0,33,65,40,54,64,57
 1559,"ND","administrativeArea1","North Dakota Senate",47,"2 years","4 years",10,37,9,38,40,46,47,31,6
-1492,"NV","administrativeArea1","Nevada State Senate",21,"2 years","4 years",13,8,10,9,19,0,21,19,18
+1492,"NV","administrativeArea1","Nevada State Senate",21,"2 years","4 years",13,8,10,9,14,0,21,19,18
 4594,"AZ","administrativeArea1","Arizona House of Representatives",60,"2 years","2 years",29,31,25,35,35,60,60,53,30
-4526,"AL","administrativeArea1","Alabama House of Representatives",105,"4 years","4 years",27,78,31,72,105,105,78,70,19
+4526,"AL","administrativeArea1","Alabama House of Representatives",105,"4 years","4 years",27,78,31,72,0,105,78,70,19
 1527,"RI","administrativeArea1","Rhode Island Senate",38,"2 years","2 years",33,5,33,4,31,0,38,27,19
 4498,"ME","administrativeArea1","Maine House of Representatives",151,"2 years","2 years",87,58,74,71,92,84,149,105,22
 1403,"CA","administrativeArea1","California Senate",40,"2 years","4 years",28,10,26,14,29,38,38,36,29
@@ -52,7 +52,7 @@
 2461,"MD","administrativeArea1","Maryland House of Delegates",141,"4 years","4 years",99,42,92,49,98,141,141,118,87
 1530,"SC","administrativeArea1","South Carolina State Senate",46,"4 years","4 years",19,26,18,27,44,45,43,40,25
 4812,"AK","administrativeArea1","Alaska House of Representatives",40,"2 years","2 years",16,23,17,21,28,7,40,38,18
-2455,"IN","administrativeArea1","Indiana House of Representatives",100,"2 years","2 years",33,67,30,70,99,100,14,83,65
+2455,"IN","administrativeArea1","Indiana House of Representatives",100,"2 years","2 years",33,67,30,70,83,100,14,83,65
 4726,"ID","administrativeArea1","Idaho State Senate",35,"2 years","2 years",7,28,6,29,30,0,35,32,9
 2448,"CT","administrativeArea1","Connecticut House of Representatives",151,"2 years","2 years",90,58,79,71,118,123,149,134,45
 1553,"WY","administrativeArea1","Wyoming State Senate",30,"2 years","4 years",3,27,3,27,23,0,30,23,12
@@ -60,15 +60,15 @@
 1598,"NH","administrativeArea1","New Hampshire State Senate",24,"2 years","2 years",14,10,10,14,17,0,24,19,15
 2652,"PA","administrativeArea1","Pennsylvania House of Representatives",203,"2 years","2 years",91,110,82,120,158,201,137,191,124
 2462,"MA","administrativeArea1","Massachusetts House of Representatives",160,"2 years","2 years",127,33,119,35,135,0,160,142,104
-2775,"LA","administrativeArea1","Louisiana House of Representatives",105,"4 years","4 years",38,57,41,58,97,2,98,68,38
+2775,"LA","administrativeArea1","Louisiana House of Representatives",105,"4 years","4 years",38,57,41,58,96,2,98,68,38
 2481,"SC","administrativeArea1","South Carolina House of Representatives",124,"2 years","2 years",44,79,44,80,107,122,99,108,58
 1426,"GA","administrativeArea1","Georgia State Senate",56,"2 years","2 years",21,35,19,37,51,0,56,54,26
 1415,"CT","administrativeArea1","Connecticut Senate",36,"2 years","2 years",19,14,18,18,22,33,25,30,17
 2485,"UT","administrativeArea1","Utah House of Representatives",75,"2 years","2 years",16,59,13,61,57,75,75,66,46
-1394,"AL","administrativeArea1","Alabama State Senate",35,"4 years","4 years",10,25,8,26,35,35,35,34,23
+1394,"AL","administrativeArea1","Alabama State Senate",35,"4 years","4 years",10,25,8,26,0,35,35,34,23
 2662,"NC","administrativeArea1","North Carolina Senate",50,"2 years","2 years",21,29,15,35,0,0,50,45,3
 2476,"OH","administrativeArea1","Ohio House of Representatives",99,"2 years","2 years",38,59,33,66,63,97,0,94,52
-2452,"HI","administrativeArea1","Hawaii House of Representatives",51,"2 years","2 years",46,5,46,5,51,0,49,32,10
+2452,"HI","administrativeArea1","Hawaii House of Representatives",51,"2 years","2 years",46,5,46,5,42,0,49,32,10
 1444,"IA","administrativeArea1","Iowa State Senate",50,"2 years","4 years",18,32,20,29,41,0,50,46,20
 2487,"VA","administrativeArea1","Virginia House of Delegates",100,"2 years","2 years",48,51,49,50,97,0,99,91,75
 1521,"OR","administrativeArea1","Oregon State Senate",30,"2 years","4 years",18,12,17,13,28,0,30,29,20
@@ -78,18 +78,18 @@
 1441,"IL","administrativeArea1","Illinois Senate",59,"2 years","4 years",40,19,37,21,46,41,39,57,36
 1446,"KS","administrativeArea1","Kansas Senate",40,"4 years","4 years",11,28,11,27,37,0,39,36,21
 4821,"NH","administrativeArea1","New Hampshire House of Representatives",400,"2 years","2 years",229,169,170,216,232,0,390,243,47
-4724,"FL","administrativeArea1","Florida Senate",40,"2 years","4 years",17,23,16,23,34,40,40,39,37
-4723,"NV","administrativeArea1","Nevada State Assembly",42,"2 years","2 years",29,13,27,14,39,0,42,36,31
+4724,"FL","administrativeArea1","Florida Senate",40,"2 years","4 years",17,23,16,23,32,40,40,39,37
+4723,"NV","administrativeArea1","Nevada State Assembly",42,"2 years","2 years",29,13,27,14,27,0,42,36,31
 2457,"KS","administrativeArea1","Kansas House of Representatives",125,"2 years","2 years",41,84,42,83,96,0,125,105,41
 1448,"KY","administrativeArea1","Kentucky State Senate",38,"2 years","4 years",9,28,11,27,35,28,25,30,29
 2664,"TX","administrativeArea1","The Senate of Texas",31,"2 years","4 years",12,19,10,20,26,27,31,31,28
 4632,"CA","administrativeArea1","California State Assembly",80,"2 years","2 years",61,19,56,24,72,79,77,80,71
 2490,"WV","administrativeArea1","West Virginia House of Delegates",100,"2 years","2 years",38,62,36,63,68,0,100,79,32
 2641,"FL","administrativeArea1","Florida House of Representatives",120,"2 years","2 years",47,72,41,76,78,103,94,110,70
-1424,"DE","administrativeArea1","Delaware State Senate",21,"2 years","4 years",12,9,11,10,21,10,21,18,10
+1424,"DE","administrativeArea1","Delaware State Senate",21,"2 years","4 years",12,9,11,10,16,10,21,18,10
 2463,"MI","administrativeArea1","Michigan House of Representatives",110,"2 years","2 years",52,58,46,63,65,110,110,102,38
 2454,"IL","administrativeArea1","Illinois House of Representatives",118,"2 years","2 years",74,44,67,51,89,41,86,111,54
-2681,"HI","administrativeArea1","Hawaii Senate",25,"2 years","4 years",24,1,24,0,25,0,25,25,13
+2681,"HI","administrativeArea1","Hawaii Senate",25,"2 years","4 years",24,1,24,0,21,0,25,25,13
 2480,"RI","administrativeArea1","Rhode Island House of Representatives",75,"2 years","2 years",65,8,64,10,60,0,72,61,32
 1532,"SD","administrativeArea1","South Dakota State Senate",35,"2 years","2 years",5,30,6,29,28,0,35,30,9
 4502,"NY","administrativeArea1","New York State Senate",63,"2 years","2 years",40,23,32,31,46,63,63,57,45

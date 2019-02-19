@@ -21,7 +21,6 @@ geojson: 'districts.geojson'
 
 
 #Change report geometries
-localpolygeojson: 'districts.geojson'
 localcentgeojson: 'geometry/lo-cent.geojson'
 statepolygeojson: 'geometry/us.geojson'
 
