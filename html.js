@@ -16,10 +16,10 @@
           
           var label = items[i].substr(0, items[i].length-4);
 
-          var bi = '<div class="row"><div class="col-md-8 pb-4"><p id="'
-                   + label +'"><a href="">#Back to Top</a></p>'
-                   +' <img class="img-fluid rounded" src="change-reports/'+ items[i] +'">'
-                   + '</div></div>'
+          var bi = '<div class="row" id="' + label +'"><div class="col-md-8 pb-4">'
+                   +'<img class="img-fluid rounded" src="change-reports/'+ items[i] +'">'
+                   +'<p><a href="">#Back to Top</a></p>'
+                   +'</div></div>'
           var ni = '<a href="#'+label+'"><li class="nav-item">'+ label +'</li></a>'
 
           b.push(bi);
