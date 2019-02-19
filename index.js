@@ -427,7 +427,7 @@ function report(election) {
         graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_t - annotationMargin);
       context.textAlign = 'start';
 
-      var em_logo = fs.readFileSync('email.svg');
+      var em_logo = fs.readFileSync('images/email.svg');
       const em_image = new Image()
       em_image.src = em_logo;
       context.globalAlpha = 0.6;
@@ -440,7 +440,7 @@ function report(election) {
         graphOriginX + graphWidth, rectangleBaseline.sm_t - annotationMargin);
       context.textAlign = 'start';
 
-      var wf_logo = fs.readFileSync('mail-bulk.svg');
+      var wf_logo = fs.readFileSync('images/mail-bulk.svg');
       const wf_image = new Image()
       wf_image.src = wf_logo;
       context.globalAlpha = 0.6;
@@ -452,7 +452,7 @@ function report(election) {
         graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin);
       context.textAlign = 'start';
 
-      var fb_logo = fs.readFileSync('facebook-sq.svg');
+      var fb_logo = fs.readFileSync('images/facebook-sq.svg');
       const fb_image = new Image()
       fb_image.src = fb_logo;
       context.globalAlpha = 0.6;
@@ -464,7 +464,7 @@ function report(election) {
         graphOriginX + graphWidth , rectangleBaseline.sm_b - annotationMargin);
       context.textAlign = 'start';
 
-      var tw_logo = fs.readFileSync('twitter-sq.svg');
+      var tw_logo = fs.readFileSync('images/twitter-sq.svg');
       const tw_image = new Image()
       tw_image.src = tw_logo;
       context.globalAlpha = 0.6;
@@ -472,7 +472,7 @@ function report(election) {
       context.globalAlpha = 1.0;
 
     // Azavea Logo    
-    var logo = fs.readFileSync('cicero_light_sm.png');
+    var logo = fs.readFileSync('images/cicero_light_sm.png');
     const image = new Image()
     image.src = logo;
     context.globalAlpha = 0.6;
