@@ -10,7 +10,7 @@ Swap-out and configure legislative data and geographies then automatically gener
 
 ![Cicero](images/cicero_light_sm.png)
 
-A project of [Cicero](https://www.cicerodata.com/).
+A project of [Cicero Data](https://www.cicerodata.com/).
 
 Read more about the methods used in this project on the [Azavea Blog, "Leveraging Node.js, D3.js, and HTML Canvas for Scalable Infographics"](https://www.azavea.com/blog/2017/07/20/node-js-d3-canvas-scalable-graphics/).
 
@@ -45,4 +45,4 @@ Images for each delegation will be written to the `change-reports` directory.
 
 `npm run html`
 
-Graphics will be written to `index.html`.
+Graphics will be written to `index.html`. Publish this page using [Github Pages](https://pages.github.com/)
