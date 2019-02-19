@@ -244,7 +244,7 @@ function report(election) {
     var titleWidth = context.measureText(titleText).width;
 
     // Subtitle
-    var subtitleText = 'Cicero database 2019 coverage';
+    var subtitleText = 'Feb 2019';
     context.font = subtitleFont;
     context.textAlign = 'end';
     context.globalAlpha = 0.35;
@@ -342,8 +342,8 @@ function report(election) {
       context.fillStyle = election.parties.left.color;
       context.fillRect(graphOriginX + 2, rectangleBaseline.c_ch_b, voteScale(cvotes[0]) - 4, rectangleHeight);
 
-      context.fillText( cvotes[0] + ' / '  + cvotes[2] + ' ' + election.parties.left.name +
-       ' vote', graphOriginX, rectangleBaseline.c_ch_b - annotationMargin);
+      context.fillText( cvotes[0] + ' ' + election.parties.left.name
+          , graphOriginX, rectangleBaseline.c_ch_b - annotationMargin);
 
     }
 
@@ -360,8 +360,8 @@ function report(election) {
       context.fillRect(graphOriginX + voteScale(cvotes[0]) + 3, rectangleBaseline.c_ch_b, voteScale(cvotes[1]) - 4, rectangleHeight);
 
       context.textAlign = 'end';
-      context.fillText(Math.round(cvotes[1] / (cvotes[0] + cvotes[1]) * 100) + '% ' + election.parties.right.name + 
-        ' vote', graphOriginX + graphWidth, rectangleBaseline.c_ch_b - annotationMargin);
+      context.fillText( cvotes[1] +' '+ election.parties.right.name  
+        , graphOriginX + graphWidth, rectangleBaseline.c_ch_b - annotationMargin);
       context.textAlign = 'start';
     }
 
@@ -387,8 +387,8 @@ function report(election) {
       context.fillStyle = election.parties.left.color;
       context.fillRect(graphOriginX + 2, rectangleBaseline.o_ch_b, voteScale(ovotes[0]) - 4, rectangleHeight);
 
-      context.fillText(Math.round(ovotes[0] / (ovotes[0] + ovotes[1]) * 100) + '% ' + election.parties.left.name +
-       ' vote', graphOriginX, rectangleBaseline.o_ch_b - annotationMargin);
+      context.fillText( ovotes[0] + ' ' + election.parties.left.name
+         , graphOriginX, rectangleBaseline.o_ch_b - annotationMargin);
 
     }
 
@@ -405,8 +405,8 @@ function report(election) {
       context.fillRect(graphOriginX + voteScale(ovotes[0]) + 3, rectangleBaseline.o_ch_b, voteScale(ovotes[1]) - 4, rectangleHeight);
 
       context.textAlign = 'end';
-      context.fillText(Math.round(ovotes[1] / (ovotes[0] + ovotes[1]) * 100) + '% ' + election.parties.right.name + 
-        ' vote', graphOriginX + graphWidth, rectangleBaseline.o_ch_b - annotationMargin);
+      context.fillText( ovotes[1] + ' ' + election.parties.right.name 
+        , graphOriginX + graphWidth, rectangleBaseline.o_ch_b - annotationMargin);
       context.textAlign = 'start';
     }
 

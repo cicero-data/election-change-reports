@@ -9,9 +9,9 @@ chamberName: 'name_formal'
 
 
 # Name of first party (left)
-partyLeftName: 'Democratic'
+partyLeftName: 'Democrats'
 # Name of second party (right)
-partyRightName: 'Republican'
+partyRightName: 'Republicans'
 # Name of other party 
 partyOtherName: 'Other'
 
