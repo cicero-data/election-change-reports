@@ -1,325 +1,97 @@
 "id","state","level","name_formal","official_count","election_frequency","term_length","cdem_tot","crep_tot","odem_tot","orep_tot","retu_tot","wfor_tot","emai_tot","yfcb_tot","ytwi_tot"
-4333,"CA","locality","San Bernardino City Council",7,"2 years","4 years",0,0,0,0,4,6,4,4,0
-2665,"UT","administrativeArea1","Utah State Senate",29,"2 years","4 years",6,23,4,23,23,29,29,26,17
-4438,"MI","administrativeArea1","Michigan Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
-4015,"CA","","Temecula City Council",5,"2 years","4 years",0,0,0,0,2,0,5,3,1
-2658,"DC","locality","Washington Mayor",1,"4 years","4 years",1,0,1,0,1,1,1,1,1
-4785,"MN","","Rochester Mayor",1,"4 years","4 years",0,0,0,0,0,1,0,1,1
-4309,"PA","administrativeArea1","Pennsylvania Senate",50,"2 years","4 years",21,28,16,28,42,44,47,46,44
-4282,"TN","administrativeArea1","Tennessee State Senate",33,"2 years","4 years",5,26,2,26,27,1,31,30,19
-4469,"OR","administrativeArea1","Oregon Governor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-4473,"NV","administrativeArea1","Nevada Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,0
-3498,"CA","","Murrieta City Council",5,"2 years","4 years",0,0,0,0,2,0,5,5,1
-4701,"NJ","locality","Atlantic City Council",9,"2 years","4 years",5,1,5,1,9,0,9,3,3
-4383,"NJ","","Elizabeth City Council",9,"2 years","4 years",0,0,0,0,9,0,9,6,0
-3394,"OR","","Eugene City Council",8,"2 years","4 years",0,0,0,0,8,0,8,6,0
-4082,"FL","","Palm Bay City Council",5,"2 years","4 years",0,0,0,0,5,0,5,5,3
-2482,"SD","administrativeArea1","South Dakota House of Representatives",70,"2 years","2 years",11,59,5,59,46,0,70,54,6
-3346,"CA","","Rialto City Council",5,"2 years","4 years",0,0,0,0,5,0,5,5,1
-4269,"CA","","Santa Clara City Council",7,"2 years","4 years",0,0,0,0,5,0,7,7,3
-1450,"LA","administrativeArea1","Louisiana State Senate",39,"4 years","4 years",15,24,15,24,38,1,39,28,16
-1523,"OK","locality","Oklahoma City City Council",8,"2 years","4 years",0,0,0,0,7,0,8,4,5
-4623,"PA","administrativeArea1","Pennsylvania Governor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-1550,"WV","administrativeArea1","West Virginia State Senate",34,"2 years","4 years",14,20,11,20,28,0,34,25,15
-3048,"MD","","Montgomery County Council",9,"4 years","4 years",9,0,5,0,5,2,9,9,7
-4396,"MN","administrativeArea1","Minnesota Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,1
-3415,"CA","","Thousand Oaks City Council",5,"2 years","4 years",0,0,0,0,3,0,5,5,2
-1481,"MO","administrativeArea1","Missouri Senate",34,"2 years","4 years",10,24,8,24,25,30,16,26,24
-1442,"IN","administrativeArea1","Indiana State Senate",50,"2 years","4 years",10,40,10,40,50,12,50,44,28
-3032,"FL","","Tallahassee City Commission",4,"4 years","4 years",4,0,1,0,1,4,0,4,3
-3532,"CA","","Daly City Council",5,"2 years","4 years",0,0,0,0,3,5,5,5,3
-2587,"SC","administrativeArea1","South Carolina Lieutenant Governor",1,"","",0,1,0,1,0,1,0,1,0
-4272,"MN","","Hennepin County Board of Commissioners",7,"2 years","4 years",0,0,0,0,5,1,7,7,2
-4016,"CA","","Victorville City Council",5,"2 years","4 years",0,0,0,0,5,0,5,4,0
-2775,"LA","administrativeArea1","Louisiana House of Representatives",105,"4 years","4 years",38,57,38,57,97,2,98,68,38
-4229,"IN","","Lake County Council",7,"4 years","4 years",1,1,0,1,5,1,1,3,0
-2668,"HI","locality","Honolulu City Council",9,"2 years","4 years",1,0,1,0,8,1,9,8,5
-2662,"NC","administrativeArea1","North Carolina Senate",50,"2 years","2 years",21,28,0,28,0,0,49,45,3
-4066,"CA","","Santa Maria City Council",5,"2 years","4 years",0,0,0,0,0,0,5,4,0
-3095,"AZ","locality","Scottsdale City Council",7,"2 years","4 years",0,0,0,0,6,0,7,7,6
-2645,"CA","locality","Santa Ana City Council",6,"2 years","4 years",0,0,0,0,3,0,6,6,1
-3894,"WA","","Vancouver City Council",7,"2 years","4 years",0,0,0,0,7,0,7,4,3
-2562,"FL","administrativeArea1","Florida Lieutenant Governor",1,"","",0,1,0,1,0,0,0,1,1
-3370,"AZ","","Glendale City Council",7,"2 years","4 years",0,0,0,0,7,0,7,7,5
-4465,"OH","administrativeArea1","Ohio Governor",1,"4 years","4 years",0,1,0,1,0,1,0,1,1
-4804,"CA","","Ventura City Council",7,"2 years","4 years",0,0,0,0,3,0,7,5,0
-1448,"KY","administrativeArea1","Kentucky State Senate",38,"2 years","4 years",9,28,9,28,35,28,25,30,29
-2664,"TX","administrativeArea1","The Senate of Texas",31,"2 years","4 years",12,19,9,19,26,27,31,31,28
-2657,"DC","locality","Washington DC City Council",13,"2 years","4 years",11,0,11,0,13,0,13,13,13
-3865,"CA","","Pomona City Council",7,"2 years","4 years",0,0,0,0,4,7,7,7,5
-4632,"CA","administrativeArea1","California State Assembly",80,"2 years","2 years",61,19,54,19,72,79,77,80,71
-2490,"WV","administrativeArea1","West Virginia House of Delegates",100,"2 years","2 years",38,62,26,62,68,0,100,79,32
-2689,"RI","administrativeArea1","Rhode Island Lieutenant Governor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-2636,"CA","locality","San Francisco Board of Supervisors",11,"2 years","4 years",0,0,0,0,8,11,11,11,6
-2641,"FL","administrativeArea1","Florida House of Representatives",120,"2 years","2 years",47,72,30,72,78,103,94,110,70
-2564,"HI","administrativeArea1","Hawaii Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,1
-4653,"CA","locality","Bakersfield City Council",7,"2 years","4 years",0,0,0,0,7,0,7,5,2
-3014,"NC","","Mecklenburg Board of County Commissioners",9,"2 years","2 years",5,0,5,0,5,0,9,9,8
-4142,"TX","locality","Laredo City Council",8,"2 years","4 years",0,0,0,0,6,8,6,8,1
-3391,"AL","","Huntsville City Council",5,"2 years","4 years",0,0,0,0,5,0,5,5,2
-4388,"MN","","Rochester City Council",7,"2 years","4 years",0,0,0,0,5,0,7,5,2
-2629,"RI","locality","Mayor of Providence",1,"4 years","4 years",1,0,1,0,1,0,0,1,1
-4798,"LA","","Shreveport City Council",7,"4 years","4 years",2,2,0,2,3,0,7,6,1
-2463,"MI","administrativeArea1","Michigan House of Representatives",110,"2 years","2 years",51,59,27,59,65,110,110,102,38
-2582,"NV","administrativeArea1","Nevada Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,1
-2454,"IL","administrativeArea1","Illinois House of Representatives",118,"2 years","2 years",74,44,55,44,89,41,86,111,54
-2681,"HI","administrativeArea1","Hawaii Senate",25,"2 years","4 years",24,1,24,1,25,0,25,23,10
-4747,"MO","","Cole County Commission",3,"2 years","4 years",0,1,0,1,3,0,3,2,1
-4808,"CA","","Santa Rosa City Council",7,"2 years","4 years (2 years for mayor)",0,0,0,0,4,0,7,7,2
-2656,"VA","locality","Virginia Beach Mayor",1,"4 years","4 years",0,0,0,0,0,0,1,1,1
-2683,"NH","administrativeArea1","New Hampshire Governor",1,"2 years","2 years",0,1,0,1,1,1,1,1,1
-2470,"NH","administrativeArea1","New Hampshire House of Representatives",400,"2 years","Shannon.Bettencourt@leg.state.nh.us",229,169,124,169,232,0,390,243,47
-4457,"TN","administrativeArea1","Tennessee Governor",1,"4 years","4 years",0,1,0,1,0,1,0,1,0
-3848,"CA","locality","Chula Vista City Council",5,"2 years","4 years",0,0,0,0,4,5,5,5,3
-4793,"CA","","Fremont City Council",7,"2 years","4 years",0,0,0,0,0,0,7,7,3
-4572,"CA","","Garden Grove City Council",7,"2 years","2 years (Mayor), 4 years (Council)",0,0,0,0,6,0,7,7,0
-2570,"KY","administrativeArea1","Kentucky Lieutenant Governor",1,"","",0,1,0,1,1,1,0,0,1
-4799,"LA","","Shreveport Mayor",1,"4 years","4 years",0,0,0,0,0,0,1,1,0
-2584,"OH","administrativeArea2","Ohio Lieutenant Governor",1,"","",0,1,0,1,0,1,0,1,1
-3788,"FL","","Port St. Lucie City Council",5,"2 years","4 years",0,0,0,0,5,0,5,5,2
-2557,"AL","administrativeArea1","Alabama Lieutenant Governor",1,"","",0,1,0,1,0,0,1,1,1
-2556,"AK","administrativeArea1","Alaska Lieutenant Governor",1,"","",0,1,0,1,0,1,0,1,1
-4526,"AL","administrativeArea1","Alabama House of Representatives",105,"4 years","4 years",27,78,27,78,105,105,78,70,19
-3041,"SC","","Richland County Council",11,"2 years","4 years",9,2,7,2,8,0,11,9,1
-4498,"ME","administrativeArea1","Maine House of Representatives",151,"2 years","2 years",88,58,56,58,93,85,150,106,23
-2563,"GA","administrativeArea1","Georgia Lieutenant Governor",1,"","",0,1,0,1,0,1,0,1,1
-4549,"TX","","Corpus Christi City Council",9,"2 years","2 years",0,0,0,0,6,0,9,7,2
-2573,"MD","administrativeArea1","Maryland Lieutenant Governor",1,"","",0,1,0,1,1,1,0,1,1
-3861,"CA","","Salinas City Council",7,"2 years","4 years (2 years for mayor)",0,0,0,0,6,7,6,6,3
-4140,"CA","","Santa Clarita City Council",5,"2 years","4 years",0,0,0,0,5,0,5,5,2
-4439,"FL","administrativeArea1","Florida Governor",1,"","4 years",0,1,0,1,0,1,0,1,1
-1454,"ME","administrativeArea1","Maine State Senate",35,"2 years","2 years",21,14,15,14,22,12,35,34,11
-2632,"CO","administrativeArea1","Colorado State Senate",35,"2 years","4 years",19,16,9,16,22,1,35,31,23
-2561,"CT","administrativeArea1","Connecticut Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,1
-2455,"IN","administrativeArea1","Indiana House of Representatives",100,"2 years","2 years",33,67,32,67,99,97,99,91,54
-4144,"TX","","Laredo Mayor",1,"4 years","4 years",0,0,0,0,1,1,1,1,1
-4764,"FL","","Hollywood City Commission",7,"2 years","4 years",0,0,0,0,6,0,7,7,3
-2574,"MI","administrativeArea1","Michigan Lieutenant Governor",1,"","",1,0,0,0,0,0,0,1,1
-3492,"CA","","Antioch City Council",5,"2 years","4 years",0,0,0,0,4,0,5,5,2
-2568,"IN","administrativeArea1","Indiana Lieutenant Governor",1,"","",0,1,0,1,1,1,0,1,1
-2462,"MA","administrativeArea1","Massachusetts House of Representatives",160,"2 years","2 years",127,33,105,33,135,0,160,142,104
-4669,"CA","locality","Sunnyvale City Council",7,"2 years","4 years",0,0,0,0,6,7,6,5,3
-4447,"HI","administrativeArea1","Hawaii Governor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-3482,"CA","","Richmond City Council",7,"2 years","4 years",0,0,0,0,5,0,7,7,2
-1426,"GA","administrativeArea1","Georgia State Senate",56,"2 years","2 years",21,35,18,35,51,0,56,54,26
-4805,"CA","","Costa Mesa City Council",7,"2 years","4 years",0,0,0,0,1,0,7,7,2
-2485,"UT","administrativeArea1","Utah House of Representatives",75,"2 years","2 years",16,59,11,59,57,75,75,66,46
-4581,"AR","","Little Rock Board of Directors",10,"2 years","4 years",0,0,0,0,10,0,10,5,5
-4661,"CA","","Corona City Council",5,"2 years","4 years",0,0,0,0,2,0,5,5,0
-4737,"TN","","Clarksville City Council",12,"2 years","4 years",0,0,0,0,9,0,12,10,3
-4773,"CA","","Downey City Council",5,"2 years","4 years",0,0,0,0,5,0,5,5,2
-4648,"AZ","locality","Phoenix Mayor",1,"4 years","4 years",0,0,0,0,1,1,1,0,1
-4449,"AK","administrativeArea1","Alaska Governor",1,"4 years","4 years",0,1,0,1,0,1,1,1,1
-2593,"VT","administrativeArea1","Vermont Lieutenant Governor",1,"","",0,0,0,0,1,1,1,1,1
-4761,"TX","locality","Dallas City Council",14,"2 years","2 years",0,0,0,0,13,14,14,12,9
-2452,"HI","administrativeArea1","Hawaii House of Representatives",51,"2 years","2 years",46,5,46,5,51,0,49,32,10
-4641,"WA","administrativeArea2","King County Executive",1,"","",0,0,0,0,1,0,1,1,1
-1521,"OR","administrativeArea1","Oregon State Senate",30,"2 years","4 years",18,12,16,12,28,0,30,29,20
-2540,"KY","administrativeArea2","Louisville Metro Council",26,"2 years","4 years",19,7,12,7,18,26,18,22,9
-4281,"WI","administrativeArea1","Wisconsin Lieutenant Governor",1,"","",1,0,0,0,0,0,1,1,1
 2666,"WA","administrativeArea1","Washington State Senate",49,"2 years","4 years",29,20,23,20,42,49,48,35,19
-4429,"VT","administrativeArea1","Vermont Governor",1,"2 years","2 years",0,1,0,1,1,1,0,1,1
-2963,"FL","","Tallahassee Mayor",1,"4 years","4 years",0,0,0,0,0,0,1,1,1
-4139,"CA","","West Covina City Council",5,"2 years","4 years",0,0,0,0,1,0,4,5,0
-4626,"TX","locality","Austin City Council",10,"2 years","4 years",0,0,0,0,8,10,10,10,8
-4254,"VA","locality","Virginia Beach City Council",10,"2 years","4 years",0,0,0,0,7,0,9,8,2
-4546,"CA","","Rancho Cucamonga City Council",5,"2 years (Council), 4 years (Mayor)","4 years",0,0,0,0,0,3,3,3,2
+2665,"UT","administrativeArea1","Utah State Senate",29,"2 years","4 years",6,23,4,23,23,29,29,26,17
 1465,"MA","administrativeArea1","Massachusetts Senate",40,"2 years","2 years",34,6,29,6,35,3,40,38,34
-2569,"KS","administrativeArea1","Kansas Lieutenant Governor",1,"","",1,0,0,0,0,0,0,1,1
-4452,"OK","administrativeArea1","Oklahoma Governor",1,"4 years","4 years",0,1,0,1,0,1,0,1,0
+2447,"CO","administrativeArea1","Colorado House of Representatives",65,"2 years","2 years",41,24,23,24,40,5,65,63,35
+2445,"AR","administrativeArea1","Arkansas House of Representatives",100,"2 years","2 years",25,75,16,75,76,0,100,88,42
+4309,"PA","administrativeArea1","Pennsylvania Senate",50,"2 years","4 years",21,28,16,28,42,44,47,46,44
+2474,"NC","administrativeArea1","North Carolina House of Representatives",120,"2 years","2 years",55,65,0,65,0,1,120,105,58
+4282,"TN","administrativeArea1","Tennessee State Senate",33,"2 years","4 years",5,26,2,26,27,1,31,30,19
 1468,"MI","administrativeArea1","Michigan State Senate",38,"4 years","4 years",16,22,3,22,9,24,35,36,19
-4228,"MO","","St. Charles County Council",7,"2 years","4 years",0,0,0,0,7,0,7,2,2
-4467,"SC","administrativeArea1","South Carolina Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
 4598,"PR","administrativeArea1","Puerto Rico House of Representatives",51,"4 years","4 years",0,0,0,0,51,49,51,47,43
 4411,"NJ","administrativeArea1","New Jersey General Assembly",80,"2 years","2 years",54,26,53,26,79,79,0,62,48
 2663,"OK","administrativeArea1","Oklahoma Senate",48,"2 years","4 years",8,40,4,40,36,48,48,47,23
 4595,"AZ","administrativeArea1","Arizona Senate",30,"2 years","2 years",13,17,8,17,16,30,30,27,26
-4445,"KS","administrativeArea1","Kansas Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,0
 2486,"VT","administrativeArea1","Vermont House of Representatives",150,"2 years","2 years",95,41,65,41,109,0,149,108,24
-1342,"OR","locality","Portland City Council",4,"2 years","4 years",1,0,0,0,3,0,3,4,3
-4730,"CA","","Vallejo City Council",7,"2 years","4 years",0,0,0,0,6,7,7,7,1
 2489,"WA","administrativeArea1","Washington House",98,"2 years","2 years",57,41,45,41,74,98,98,88,48
 2643,"KY","administrativeArea1","Kentucky House of Representatives",100,"2 years","2 years",40,60,23,60,68,63,50,84,59
 2473,"NY","administrativeArea1","New York State Assembly",150,"2 years","2 years",106,43,93,43,128,91,124,136,91
-1437,"CT","administrativeArea1","Connecticut Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
-2690,"NE","administrativeArea1","Nebraska Lieutenant Governor",1,"4 years","4 years",0,1,0,1,1,1,1,0,0
-4782,"FL","","City of Coral Springs Commission",5,"2 years","Mayor: 2 years,  Commissioners: 4 years",0,0,0,0,3,0,4,4,4
-4259,"CA","locality","San Diego City Council",9,"2 years","4 years",3,3,3,3,6,0,9,9,6
 4763,"DE","administrativeArea1","Delaware House of Representatives",41,"2 years","2 years",26,15,26,15,41,0,41,34,9
-4795,"CA","locality","Oxnard City Council",6,"2 years","4 years",0,0,0,0,0,0,6,4,1
-4774,"OK","locality","Tulsa City Council",9,"2 years","2 years",0,0,0,0,5,0,9,9,3
-4779,"OR","regional","Oregon Metro Council",6,"2 years","4 years",0,0,0,0,4,0,6,6,1
-3793,"CA","","Orange City Council",5,"2 years","4 years (2 years for mayor)",0,0,0,0,3,0,3,1,0
-3338,"OR","","Hillsboro City Council",7,"2 years","4 years",0,0,0,0,6,7,0,6,1
+2482,"SD","administrativeArea1","South Dakota House of Representatives",70,"2 years","2 years",11,59,5,59,46,0,70,54,6
 2291,"MD","administrativeArea1","Maryland State Senate",47,"4 years","4 years",32,15,19,15,30,47,45,43,30
-4778,"GA","","Augusta Commission",10,"2 years","4 years",0,0,0,0,7,0,10,9,2
-2954,"MO","","Greene County Commission",3,"2 years","4 years",0,2,0,2,1,1,3,2,1
+1551,"WI","administrativeArea1","Wisconsin State Senate",33,"2 years","4 years",14,19,13,19,29,24,33,29,25
+1450,"LA","administrativeArea1","Louisiana State Senate",39,"4 years","4 years",15,24,15,24,38,1,39,30,16
 2492,"WY","administrativeArea1","Wyoming House of Representatives",60,"2 years","2 years",10,50,6,50,49,0,60,34,8
-3814,"AR","","Little Rock Mayor",1,"4 years","4 years",0,0,0,0,0,0,1,1,0
-3803,"CA","","Fontana City Council",5,"2 years","4 years",0,0,0,0,0,0,5,5,1
-4102,"TN","","Mayor of Clarksville",1,"4 years","4 years",1,0,0,0,0,0,1,1,0
-2675,"","country","United States Senate",100,"2 years","6 years",45,53,43,53,91,92,4,100,99
-4384,"CA","","Escondido City Council",5,"2 years","4 years",0,0,0,0,3,5,2,5,2
-4789,"CA","","Carlsbad City Council",4,"2 years","4 years",0,0,0,0,2,0,4,4,4
+1550,"WV","administrativeArea1","West Virginia State Senate",34,"2 years","4 years",14,20,11,20,28,0,34,25,15
 2483,"TN","administrativeArea1","Tennessee House of Representatives",99,"2 years","2 years",26,73,18,73,71,0,99,95,38
-4450,"IN","administrativeArea1","Indiana Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-2586,"PA","administrativeArea1","Pennsylvania Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,1
-2628,"RI","locality","Providence City Council",15,"4 years","4 years",15,0,11,0,11,15,15,14,5
-3424,"CA","","Oceanside City Council",5,"2 years","4 years",0,0,0,0,0,0,5,4,1
-4436,"IL","administrativeArea1","Illinois Governor",1,"4 years","4 years",1,0,0,0,0,0,1,1,0
-4810,"OR","","Gresham City Council",7,"2 years","4 years",0,0,0,0,6,0,7,6,2
-4500,"CA","locality","Berkeley City Council",8,"2 years","4 years",0,0,0,0,6,0,8,7,4
+4790,"OK","administrativeArea1","Oklahoma House of Representatives",101,"2 years","2 years",24,77,15,77,55,101,55,96,54
+2451,"GA","administrativeArea1","Georgia House of Representatives",180,"2 years","2 years",75,104,58,104,143,0,177,174,73
+4814,"AK","administrativeArea1","Alaska State Senate",20,"2 years","4 years",7,13,4,13,15,0,20,18,8
 2466,"MS","administrativeArea1","Mississippi House of Representatives",122,"4 years","4 years",48,72,48,72,120,0,121,83,36
-2647,"ND","administrativeArea1","North Dakota House of Representatives",94,"2 years","4 years",15,78,11,78,82,93,93,64,11
-4499,"MN","administrativeArea1","Minnesota House of Representatives",134,"2 years","2 years",0,59,0,59,95,128,134,122,63
-4253,"CA","locality","Stockton City Council",6,"2 years","4 years",0,1,0,1,4,6,6,6,2
-2581,"NM","administrativeArea1","New Mexico Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,0
-4743,"GA","","Columbus Mayor",1,"4 years","4 years",0,0,0,0,0,0,1,1,0
-1403,"CA","administrativeArea1","California Senate",40,"2 years","4 years",28,10,22,10,29,38,38,36,29
-4725,"ID","administrativeArea1","Idaho House of Representatives",70,"2 years","2 years",14,56,8,56,50,5,70,59,22
-4812,"AK","administrativeArea1","Alaska House of Representatives",40,"2 years","2 years",16,23,12,23,28,7,40,38,18
-2823,"CA","locality","Oakland City Council",8,"2 years","4 years",0,0,0,0,5,0,8,8,4
-1553,"WY","administrativeArea1","Wyoming State Senate",30,"2 years","4 years",3,27,2,27,23,0,23,18,10
-2478,"OR","administrativeArea1","Oregon House of Representatives",60,"2 years","2 years",38,22,33,22,50,0,60,55,30
-1598,"NH","administrativeArea1","New Hampshire State Senate",24,"2 years","2 years",14,10,8,10,17,0,24,19,15
-3825,"CA","","Moreno Valley City Council",5,"2 years","4 years (2 years for mayor)",0,0,0,0,4,0,5,5,2
-4637,"MI","locality","Ann Arbor City Council",11,"2 years","4 years",10,0,6,0,7,0,11,10,5
-4437,"RI","administrativeArea1","Rhode Island Governor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-4462,"ID","administrativeArea1","Idaho Governor",1,"4 years","4 years",0,1,0,1,0,1,1,1,1
-4472,"NM","administrativeArea1","New Mexico Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
-3017,"IN","","Lake County Board of Commissioners",3,"2 years","4 years",2,1,2,1,3,3,0,1,1
-4817,"TX","","Midland City Council",7,"1 year","3 years",0,0,0,0,5,0,7,6,2
-4014,"AZ","","Gilbert Town Council",7,"2 years","4 years",0,0,0,0,6,6,7,7,5
-4431,"AL","administrativeArea1","Alabama Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-3806,"CA","","Ontario City Council",5,"2 years","4 years",0,0,0,0,5,5,0,4,2
-2948,"MO","","St. Charles County Executive",1,"4 years","4 years",0,0,0,0,1,0,1,0,0
-2610,"TX","locality","Austin Mayor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-4361,"FL","","Fort Myers City Council",6,"2 years","4 years",0,0,0,0,5,0,6,4,1
-4803,"TX","","Odessa City Council",7,"2 years","4 years",0,0,0,0,3,0,7,4,0
-4784,"KY","administrativeArea2","Louisville Mayor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-2932,"MO","","St. Louis County Executive",1,"4 years","4 years",0,0,0,0,1,0,1,1,1
-4456,"CA","administrativeArea1","California Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
-4471,"IA","administrativeArea1","Iowa Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-4560,"NV","","Reno City Council",7,"2 years","4 years",0,0,0,0,6,0,6,6,6
-2642,"IA","administrativeArea1","Iowa House of Representatives",100,"2 years","2 years",46,54,36,54,77,0,100,88,40
-4662,"CA","administrativeArea2","Los Angeles County Board of Supervisors",5,"2 years","4 years",0,0,0,0,5,4,5,5,5
-1407,"AR","administrativeArea1","Arkansas Senate",35,"2 years","4 years",9,26,8,26,29,0,35,30,22
-1441,"IL","administrativeArea1","Illinois Senate",59,"2 years","4 years",41,18,32,18,46,41,39,57,36
-1446,"KS","administrativeArea1","Kansas Senate",40,"4 years","4 years",11,28,9,28,37,0,39,36,21
-2638,"CA","locality","San Jose City Council",10,"2 years","4 years",0,0,0,0,8,2,10,9,7
-4432,"MD","administrativeArea1","Maryland Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-4786,"NC","","Wake County Board of Commissioners",7,"2 years","2 years",2,0,0,0,5,1,7,7,4
-3505,"CA","","Fairfield City Council",5,"2 years","4 years",0,0,0,0,5,0,5,3,3
-4561,"NC","","Winston-Salem Mayor",1,"4 years","4 years",1,0,1,0,1,0,1,1,0
-4515,"CA","","El Cajon City Council",5,"2 years","4 years",0,0,0,0,0,5,0,3,2
-2558,"AR","administrativeArea1","Arkansas Lieutenant Governor",1,"","",0,1,0,1,1,1,1,1,1
-3047,"MD","","Montgomery County Executive",1,"4 years","4 years",1,0,0,0,0,1,1,1,1
-87,"CA","locality","San Bernardino Mayor",1,"","",0,0,0,0,0,0,1,1,0
-4507,"","country","United States House of Representatives",441,"2 years","",239,200,172,200,337,438,10,437,389
-2567,"IL","administrativeArea1","Illinois Lieutenant Governor",1,"","",1,0,0,0,0,0,0,1,0
-4466,"AZ","administrativeArea1","Arizona Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-1424,"DE","administrativeArea1","Delaware State Senate",21,"2 years","4 years",12,9,12,9,21,10,21,18,10
-4800,"CA","","Visalia City Council",5,"2 years","4 years",0,0,0,0,4,0,5,4,0
-4544,"OR","","Salem City Council",9,"2 years","4 years (2 years for mayor)",0,0,0,0,8,9,9,7,0
-4330,"VA","","Arlington County Board",5,"Annually","4 years",0,0,0,0,4,0,5,5,4
-2560,"CO","administrativeArea1","Colorado Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,1
-2480,"RI","administrativeArea1","Rhode Island House of Representatives",75,"2 years","2 years",65,8,54,8,60,0,72,61,32
-1532,"SD","administrativeArea1","South Dakota State Senate",35,"2 years","2 years",6,29,4,29,28,0,35,30,9
-4440,"TX","administrativeArea1","Texas Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-4502,"NY","administrativeArea1","New York State Senate",63,"2 years","2 years",41,22,25,22,46,63,63,57,45
-3800,"CA","","Elk Grove City Council",5,"2 years","4 years (2 years for mayor)",0,0,0,0,5,0,5,5,4
-2536,"NE","administrativeArea1","Nebraska Unicameral Legislature",49,"2 years","4 years",0,0,0,0,36,0,48,43,19
-3808,"CA","","Vista City Council",5,"2 years","4 years",0,0,0,0,0,0,5,5,4
-4741,"TX","","College Station City Council",7,"1 year","3 years",0,0,0,0,5,0,7,6,1
-4453,"KY","administrativeArea1","Kentucky Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-1467,"ME","administrativeArea1","Maine Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
-4435,"WY","administrativeArea1","Wyoming Governor",1,"4 years","4 years",0,1,0,1,0,0,0,1,1
-2572,"MA","administrativeArea1","Massachusetts Lieutenant Governor",1,"","",0,1,0,1,1,1,0,1,1
-3878,"CA","","Palmdale City Council",5,"2 years","4 years (2 years for mayor)",0,0,0,0,3,0,5,5,1
-4721,"MT","administrativeArea1","Montana House of Representatives",100,"2 years","2 years",42,58,27,58,68,100,99,86,36
-2491,"WI","administrativeArea1","Wisconsin Assembly",99,"2 years","2 years",34,64,27,64,83,70,98,92,68
-4042,"AL","locality","Montgomery City Council",9,"4 years","4 years",0,0,0,0,9,0,9,5,2
-3448,"CA","","Simi Valley City Council",5,"2 years","4 years (2 years for mayor)",0,0,0,0,3,0,4,4,2
-1513,"OH","administrativeArea1","Ohio Senate",33,"2 years","4 years",9,23,5,23,21,32,11,30,24
+2644,"MO","administrativeArea1","Missouri House of Representatives",163,"2 years","2 years",47,116,31,116,104,1,106,146,74
+1481,"MO","administrativeArea1","Missouri Senate",34,"2 years","4 years",10,24,8,24,25,30,16,26,24
+2491,"WI","administrativeArea1","Wisconsin Assembly",99,"2 years","2 years",35,63,28,63,83,70,98,92,68
+2647,"ND","administrativeArea1","North Dakota House of Representatives",94,"2 years","4 years",15,79,11,79,82,93,94,64,11
+1513,"OH","administrativeArea1","Ohio Senate",33,"2 years","4 years",9,24,5,24,21,33,11,31,24
+1442,"IN","administrativeArea1","Indiana State Senate",50,"2 years","4 years",10,40,10,40,50,12,50,44,28
 1543,"VT","administrativeArea1","Vermont Senate",30,"2 years","2 years",19,6,18,6,25,0,30,22,5
-2934,"MO","","St. Louis County Council",7,"2 years","4 years",4,3,3,3,5,0,7,7,1
-4618,"NJ","locality","Paterson City Council",9,"2 years","4 years",0,0,0,0,9,0,9,6,0
-2626,"CA","locality","Oakland Mayor",1,"4 years","4 years",0,0,0,0,1,0,1,1,1
-4463,"MN","administrativeArea1","Minnesota Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
-4801,"CA","","Fullerton City Council",5,"2 years","4 years",0,0,0,0,2,0,5,4,3
-1474,"MN","administrativeArea1","Minnesota State Senate",67,"4 years","4 years",0,34,0,34,65,36,53,62,55
+2661,"TX","administrativeArea1","Texas House of Representatives",150,"2 years","2 years",65,83,46,83,119,148,121,140,104
+4499,"MN","administrativeArea1","Minnesota House of Representatives",134,"2 years","2 years",0,58,0,58,94,127,133,121,62
+1474,"MN","administrativeArea1","Minnesota State Senate",67,"4 years","4 years",0,35,0,35,65,40,54,64,57
 1559,"ND","administrativeArea1","North Dakota Senate",47,"2 years","4 years",10,37,8,37,40,46,47,31,6
 1492,"NV","administrativeArea1","Nevada State Senate",21,"2 years","4 years",13,8,11,8,19,0,21,19,18
-4594,"AZ","administrativeArea1","Arizona House of Representatives",60,"2 years","2 years",28,32,15,32,35,60,60,53,30
+4594,"AZ","administrativeArea1","Arizona House of Representatives",60,"2 years","2 years",29,31,15,31,35,60,60,53,30
+4526,"AL","administrativeArea1","Alabama House of Representatives",105,"4 years","4 years",27,78,27,78,105,105,78,70,19
 1527,"RI","administrativeArea1","Rhode Island Senate",38,"2 years","2 years",33,5,28,5,31,0,38,27,19
-4446,"AR","administrativeArea1","Arkansas Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-530,"CA","locality","Oxnard Mayor",1,"","",0,0,0,0,0,0,1,1,0
+4498,"ME","administrativeArea1","Maine House of Representatives",151,"2 years","2 years",87,58,55,58,92,84,149,105,22
+1403,"CA","administrativeArea1","California Senate",40,"2 years","4 years",28,10,22,10,29,38,38,36,29
 2472,"NM","administrativeArea1","New Mexico House of Representatives",70,"2 years","2 years",46,24,31,24,51,3,70,57,20
-3371,"CA","","Irvine City Council",5,"2 years","Mayor: 2 years Council members: 4 years",0,0,0,0,3,0,5,5,2
-4459,"WI","administrativeArea1","Wisconsin Governor",1,"4 years","4 years",1,0,0,0,0,1,1,1,1
-2639,"CA","locality","San Jose Mayor",1,"4 years","4 years",1,0,1,0,1,0,1,1,1
-4455,"NY","administrativeArea1","New York Governor",1,"4 years","4 years",1,0,1,0,1,1,0,1,1
-4458,"SD","administrativeArea1","South Dakota Governor",1,"4 years","4 years",0,1,0,1,0,1,0,1,1
+4725,"ID","administrativeArea1","Idaho House of Representatives",70,"2 years","2 years",14,56,8,56,50,5,70,59,22
+1454,"ME","administrativeArea1","Maine State Senate",35,"2 years","2 years",21,14,15,14,22,12,35,34,11
+2632,"CO","administrativeArea1","Colorado State Senate",35,"2 years","4 years",19,16,9,16,22,1,35,31,23
+2461,"MD","administrativeArea1","Maryland House of Delegates",141,"4 years","4 years",99,42,63,42,98,141,141,118,87
 1530,"SC","administrativeArea1","South Carolina State Senate",46,"4 years","4 years",19,26,18,26,44,45,43,40,25
-1436,"CO","administrativeArea1","Colorado Governor",1,"4 years","4 years",1,0,0,0,0,1,0,1,1
+4812,"AK","administrativeArea1","Alaska House of Representatives",40,"2 years","2 years",16,23,12,23,28,7,40,38,18
+2455,"IN","administrativeArea1","Indiana House of Representatives",100,"2 years","2 years",33,67,32,67,99,100,20,83,65
+4726,"ID","administrativeArea1","Idaho State Senate",35,"2 years","2 years",7,28,6,28,30,0,35,32,9
 2448,"CT","administrativeArea1","Connecticut House of Representatives",151,"2 years","2 years",90,58,65,58,118,123,149,134,45
-3361,"TX","","Wichita Falls City Council",7,"1 year","2 years",0,1,0,1,5,0,7,4,1
-2652,"PA","administrativeArea1","Pennsylvania House of Representatives",203,"2 years","2 years",91,110,67,110,158,178,137,183,108
-2588,"SD","administrativeArea1","South Dakota Lieutenant Governor",1,"","",0,1,0,1,0,1,0,1,1
-4433,"MA","administrativeArea1","Massachusetts Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
+1553,"WY","administrativeArea1","Wyoming State Senate",30,"2 years","4 years",3,27,2,27,23,0,30,23,12
+2478,"OR","administrativeArea1","Oregon House of Representatives",60,"2 years","2 years",38,22,33,22,50,0,60,55,30
+1598,"NH","administrativeArea1","New Hampshire State Senate",24,"2 years","2 years",14,10,8,10,17,0,24,19,15
+2652,"PA","administrativeArea1","Pennsylvania House of Representatives",203,"2 years","2 years",91,110,67,110,158,201,137,191,124
+2462,"MA","administrativeArea1","Massachusetts House of Representatives",160,"2 years","2 years",127,33,105,33,135,0,160,142,104
+2775,"LA","administrativeArea1","Louisiana House of Representatives",105,"4 years","4 years",38,57,38,57,97,2,98,68,38
+2481,"SC","administrativeArea1","South Carolina House of Representatives",124,"2 years","2 years",44,79,38,79,107,122,99,108,58
+1426,"GA","administrativeArea1","Georgia State Senate",56,"2 years","2 years",21,35,18,35,51,0,56,54,26
+1415,"CT","administrativeArea1","Connecticut Senate",36,"2 years","2 years",19,14,11,14,22,33,25,30,17
+2485,"UT","administrativeArea1","Utah House of Representatives",75,"2 years","2 years",16,59,11,59,57,75,75,66,46
 1394,"AL","administrativeArea1","Alabama State Senate",35,"4 years","4 years",10,25,10,25,35,35,35,34,23
-4766,"CA","locality","Anaheim City Council",6,"2 years","4 years",0,0,0,0,4,0,6,6,2
-2614,"CA","locality","Fresno City Council",7,"2 years","4 years",0,0,0,0,5,5,7,7,4
-2819,"FL","administrativeArea2","Miami-Dade Board of County Commissioners",13,"2 years","4 years",0,0,0,0,13,0,13,13,12
-4377,"MD","","Prince Georges County Executive",1,"4 years","4 years",1,0,0,0,0,0,1,1,1
-4809,"MD","","Prince Georges County Council",11,"4 years","4 years",11,0,4,0,4,0,9,10,5
-4767,"CA","locality","Anaheim Mayor",1,"4 years","4 years",0,0,0,0,0,0,1,1,1
+2662,"NC","administrativeArea1","North Carolina Senate",50,"2 years","2 years",21,29,0,29,0,0,50,45,3
+2476,"OH","administrativeArea1","Ohio House of Representatives",99,"2 years","2 years",38,59,21,59,63,97,0,94,52
+2452,"HI","administrativeArea1","Hawaii House of Representatives",51,"2 years","2 years",46,5,46,5,51,0,49,32,10
 1444,"IA","administrativeArea1","Iowa State Senate",50,"2 years","4 years",18,32,14,32,41,0,50,46,20
 2487,"VA","administrativeArea1","Virginia House of Delegates",100,"2 years","2 years",48,51,48,51,97,0,99,91,75
-2566,"ID","administrativeArea1","Idaho Lieutenant Governor",1,"","",0,1,0,1,0,1,0,1,0
-4448,"NE","administrativeArea1","Nebraska Governor",1,"4 years","4 years",0,1,0,1,1,1,0,1,1
-4802,"CA","","Menlo Park City Council",5,"2 years","4 years",0,0,0,0,2,0,5,5,4
-2583,"NY","administrativeArea1","New York Lieutenant Governor",1,"","",1,0,1,0,1,0,0,1,1
-4724,"FL","administrativeArea1","Florida Senate",40,"2 years","4 years",17,23,15,23,34,39,35,38,33
-4723,"NV","administrativeArea1","Nevada State Assembly",42,"2 years","2 years",29,12,27,12,39,0,41,35,31
-4780,"FL","","Davie Town Council",5,"4 years","4 years",0,0,0,0,5,0,5,4,1
-4087,"CA","","Inglewood City Council",5,"2 years","4 years",0,0,0,0,5,0,5,3,1
-2447,"CO","administrativeArea1","Colorado House of Representatives",65,"2 years","2 years",41,24,23,24,40,5,65,63,35
-2445,"AR","administrativeArea1","Arkansas House of Representatives",100,"2 years","2 years",25,75,16,75,76,0,100,88,42
-2474,"NC","administrativeArea1","North Carolina House of Representatives",120,"2 years","2 years",56,64,0,64,0,1,120,105,58
-2590,"TX","administrativeArea1","Texas Lieutenant Governor",1,"","",0,1,0,1,1,1,1,1,1
-4562,"NC","","Winston-Salem City Council",8,"4 years","4 years",6,1,6,1,7,0,7,4,1
-4464,"GA","administrativeArea1","Georgia Governor",1,"4 years","4 years",0,1,0,1,0,1,1,1,0
-4316,"CA","","Jurupa Valley City Council",5,"2 years","4 years",0,0,0,0,2,0,4,5,0
-3423,"CA","","Concord City Council",5,"2 years","4 years",0,0,0,0,0,0,5,4,3
-1551,"WI","administrativeArea1","Wisconsin State Senate",33,"2 years","4 years",14,19,13,19,29,24,33,29,25
-3518,"CA","","Hayward City Council",7,"2 years","4 years",0,0,0,0,6,0,7,7,6
-3056,"IL","","Cook County Board of Commissioners",17,"4 years","4 years",11,2,8,2,10,0,11,16,6
-4783,"FL","","Pompano Beach City Commission",6,"2 years","2 years",0,0,0,0,3,0,6,5,1
-3812,"CA","","El Monte City Council",5,"2 Years","4 years (2 years for mayor)",0,0,0,0,5,0,3,3,1
-4355,"GA","","Augusta Mayor",1,"4 years","4 years",1,0,1,0,1,0,1,1,1
-3593,"FL","","Miami Gardens City Council",7,"2 years","4 years",0,0,0,0,5,0,7,5,2
-1376,"TX","locality","El Paso City Council",8,"2 years","4 years",0,0,0,0,8,8,8,8,7
-4668,"CA","","Roseville City Council",5,"2 years","4 years",0,0,0,0,3,0,5,5,2
-4790,"OK","administrativeArea1","Oklahoma House of Representatives",101,"2 years","2 years",24,77,15,77,55,101,55,88,28
-2451,"GA","administrativeArea1","Georgia House of Representatives",180,"2 years","2 years",75,103,58,103,143,0,176,173,73
-4814,"AK","administrativeArea1","Alaska State Senate",20,"2 years","4 years",7,13,4,13,15,0,20,18,8
-2644,"MO","administrativeArea1","Missouri House of Representatives",163,"2 years","2 years",47,116,31,116,104,1,106,146,74
-2661,"TX","administrativeArea1","Texas House of Representatives",150,"2 years","2 years",65,83,46,83,119,147,120,139,104
-3057,"IL","","Cook County Board President",1,"4 years","4 years",1,0,1,0,1,0,0,1,1
-4523,"AZ","","Surprise City Council",7,"2 years","4 years",0,0,0,0,4,7,7,7,2
-2461,"MD","administrativeArea1","Maryland House of Delegates",141,"4 years","4 years",100,41,64,41,98,141,141,118,87
-4726,"ID","administrativeArea1","Idaho State Senate",35,"2 years","2 years",7,28,6,28,30,0,35,32,9
-2565,"IA","administrativeArea1","Iowa Lieutenant Governor",1,"","",0,1,0,1,1,1,0,1,1
-2481,"SC","administrativeArea1","South Carolina House of Representatives",124,"2 years","2 years",44,79,38,79,107,122,99,105,55
-1415,"CT","administrativeArea1","Connecticut Senate",36,"2 years","2 years",19,14,11,14,22,33,25,30,17
-2559,"CA","administrativeArea1","California Lieutenant Governor",1,"","",1,0,0,0,0,0,0,1,1
-2476,"OH","administrativeArea1","Ohio House of Representatives",99,"2 years","2 years",38,60,21,60,64,98,0,95,53
-4646,"AZ","","Peoria City Council",7,"2 years (City Council) 4 years (Mayor)","4 years",0,0,0,0,0,0,7,7,1
+1521,"OR","administrativeArea1","Oregon State Senate",30,"2 years","4 years",18,12,16,12,28,0,30,29,20
 4722,"MT","administrativeArea1","Montana State Senate",50,"2 years","4 years",20,30,15,30,40,0,50,31,12
-4234,"OR","regional","Oregon Metro Council President",1,"4 years","4 years",0,0,0,0,0,0,1,1,0
-2585,"OK","administrativeArea1","Oklahoma Lieutenant Governor",1,"","",1,0,0,0,0,1,0,1,0
-3107,"CA","locality","Huntington Beach City Council",7,"2 years","4 years",0,0,0,0,6,0,7,7,6
+2642,"IA","administrativeArea1","Iowa House of Representatives",100,"2 years","2 years",46,54,36,54,77,0,100,88,40
+1407,"AR","administrativeArea1","Arkansas Senate",35,"2 years","4 years",9,26,8,26,29,0,35,30,22
+1441,"IL","administrativeArea1","Illinois Senate",59,"2 years","4 years",40,19,32,19,46,41,39,57,36
+1446,"KS","administrativeArea1","Kansas Senate",40,"4 years","4 years",11,28,9,28,37,0,39,36,21
+4821,"NH","administrativeArea1","New Hampshire House of Representatives",400,"2 years","2 years",229,169,124,169,232,0,390,243,47
+4724,"FL","administrativeArea1","Florida Senate",40,"2 years","4 years",17,23,15,23,34,40,40,39,37
+4723,"NV","administrativeArea1","Nevada State Assembly",42,"2 years","2 years",29,13,27,13,39,0,42,36,31
 2457,"KS","administrativeArea1","Kansas House of Representatives",125,"2 years","2 years",41,84,35,84,96,0,125,105,41
-4748,"AZ","","Chandler City Council",7,"2 years","4 years",0,0,0,0,6,0,7,7,6
-2622,"AZ","locality","Mesa City Council",6,"2 years","4 years",0,0,0,0,5,0,6,6,4
+1448,"KY","administrativeArea1","Kentucky State Senate",38,"2 years","4 years",9,28,9,28,35,28,25,30,29
+2664,"TX","administrativeArea1","The Senate of Texas",31,"2 years","4 years",12,19,9,19,26,27,31,31,28
+4632,"CA","administrativeArea1","California State Assembly",80,"2 years","2 years",61,19,54,19,72,79,77,80,71
+2490,"WV","administrativeArea1","West Virginia House of Delegates",100,"2 years","2 years",38,62,26,62,68,0,100,79,32
+2641,"FL","administrativeArea1","Florida House of Representatives",120,"2 years","2 years",47,72,30,72,78,103,94,110,70
+1424,"DE","administrativeArea1","Delaware State Senate",21,"2 years","4 years",12,9,12,9,21,10,21,18,10
+2463,"MI","administrativeArea1","Michigan House of Representatives",110,"2 years","2 years",52,58,28,58,65,110,110,102,38
+2454,"IL","administrativeArea1","Illinois House of Representatives",118,"2 years","2 years",74,44,55,44,89,41,86,111,54
+2681,"HI","administrativeArea1","Hawaii Senate",25,"2 years","4 years",24,1,24,1,25,0,25,25,13
+2480,"RI","administrativeArea1","Rhode Island House of Representatives",75,"2 years","2 years",65,8,54,8,60,0,72,61,32
+1532,"SD","administrativeArea1","South Dakota State Senate",35,"2 years","2 years",5,30,3,30,28,0,35,30,9
+4502,"NY","administrativeArea1","New York State Senate",63,"2 years","2 years",40,23,25,23,46,63,63,57,45
+2536,"NE","administrativeArea1","Nebraska Unicameral Legislature",49,"2 years","4 years",0,0,0,0,36,0,48,43,19
+4721,"MT","administrativeArea1","Montana House of Representatives",100,"2 years","2 years",42,58,27,58,68,100,99,86,36
