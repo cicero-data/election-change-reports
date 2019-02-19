@@ -292,9 +292,9 @@ function report(election) {
       { t: (Chamber.stats.official_count - Chamber.stats.retu_tot ), s: sentenceBoldFont, h: true, n: false },
       { t: ' out of ' , s: sentenceBoldFont, h: false, n: false},
       { t: (Chamber.stats.official_count) , s: sentenceBoldFont, h: true, n: false},
-      { t: ' members serving in the ', s: sentenceBoldFont, h: false, n: false },
+      { t: ' members of the ', s: sentenceBoldFont, h: false, n: false },
       { t: Chamber.name, s: sentenceBoldFont, h: true, n: true },
-      { t: 'are new to office following the November 6, 2018 elections.', s: sentenceBoldFont, h: false, n: true },
+      { t: 'are new to office after the Nov 6, 2018 elections.', s: sentenceBoldFont, h: false, n: true },
     ];
 
     // Write the new officials sentence
@@ -327,7 +327,7 @@ function report(election) {
     context.font = annotationFont;
 
     //// Draw rectangles for votes in current session
-
+    context.fillStyle = election.parties.other.color;
     context.fillText('Current Legislative Term', graphOriginX, rectangleBaseline.c_ch_l - annotationMargin);
 
     if (cvotes[0] >= 1) {
@@ -365,7 +365,7 @@ function report(election) {
       context.textAlign = 'start';
     }
 
-    if (cvotes[2] >= 1) {
+    if ( (cvotes[2] - (cvotes[0] + cvotes[1]) ) >= 1) {
       // Other Party
       //// fill
       context.fillStyle = election.parties.other.color;
@@ -373,6 +373,7 @@ function report(election) {
     }
 
     //// Draw rectangles for votes in previous session
+    context.fillStyle = election.parties.other.color;
     context.fillText('Previous Legislative Term', graphOriginX, rectangleBaseline.o_ch_l - annotationMargin);
 
     if (ovotes[0] >= 1) {
@@ -410,66 +411,76 @@ function report(election) {
       context.textAlign = 'start';
     }
 
-    if (cvotes[2] >= 1) {
+    if ( (ovotes[2] - (ovotes[0] + ovotes[1]) )  >= 1) {
       // Other Party
       //// fill
       context.fillStyle = election.parties.other.color;
       context.fillRect(graphOriginX + voteScale(ovotes[0]) + voteScale(ovotes[1]) + 3, rectangleBaseline.o_ch_b, voteScale(cvotes[2] - (ovotes[0] + ovotes[1]) ) - 4, rectangleHeight);
     }
 
+    context.fillStyle = ptbackground;
+    var mediaStats =  {
+        emai: Math.round((Chamber.stats.emai_tot / Chamber.stats.official_count) * 100),
+        webf: Math.round((Chamber.stats.wfor_tot / Chamber.stats.official_count) * 100),
+        twit: Math.round((Chamber.stats.ytwi_tot / Chamber.stats.official_count) * 100),
+        fcbk: Math.round((Chamber.stats.yfcb_tot / Chamber.stats.official_count) * 100)
+    }
 
-
-      // Right Party
-      //// shadow
-      context.fillStyle = ptbackground;
-      context.textAlign = 'end';
-      context.fillText(Math.round(Chamber.stats.emai_tot / (Chamber.stats.official_count) * 100) + '% Email ', 
-        graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_t - annotationMargin);
+    if (mediaStats.emai > 20) { 
       context.textAlign = 'start';
+      context.fillText( 'Email ' + mediaStats.emai + '%', 
+        graphOriginX + 60, rectangleBaseline.sm_t - annotationMargin);
+      context.textAlign = 'end';
 
       var em_logo = fs.readFileSync('images/email.svg');
       const em_image = new Image()
       em_image.src = em_logo;
       context.globalAlpha = 0.6;
-      context.drawImage(em_image, graphOriginX, rectangleBaseline.sm_t - annotationMargin - 20, 40,40);
+      context.drawImage(em_image, graphOriginX, rectangleBaseline.sm_t - annotationMargin - 30, 40,40);
       context.globalAlpha = 1.0;
-    
+    }
 
-      context.textAlign = 'end';
-      context.fillText(Math.round(Chamber.stats.wfor_tot / (Chamber.stats.official_count) * 100) + '% Webform ', 
-        graphOriginX + graphWidth, rectangleBaseline.sm_t - annotationMargin);
+    if (mediaStats.webf > 20) { 
       context.textAlign = 'start';
+      context.fillText('Webform ' + mediaStats.webf + '%', 
+        graphOriginX + graphWidth * (1/2) + 60, rectangleBaseline.sm_t - annotationMargin);
+      context.textAlign = 'end';
 
       var wf_logo = fs.readFileSync('images/mail-bulk.svg');
       const wf_image = new Image()
       wf_image.src = wf_logo;
       context.globalAlpha = 0.6;
-      context.drawImage(wf_image, graphOriginX + graphWidth * (1/2) , rectangleBaseline.sm_t - annotationMargin - 20, 40,40);
+      context.drawImage(wf_image, graphOriginX + graphWidth * (1/2) , rectangleBaseline.sm_t - annotationMargin - 30, 40,40);
       context.globalAlpha = 1.0;
+    }
 
-      context.textAlign = 'end';
-      context.fillText(Math.round(Chamber.stats.yfcb_tot / (Chamber.stats.official_count) * 100) + '% Facebook ', 
-        graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin);
+    if (mediaStats.fcbk > 20) { 
       context.textAlign = 'start';
+      context.fillText('Facebook '+ mediaStats.fcbk + '%', 
+        graphOriginX + 60, rectangleBaseline.sm_b - annotationMargin);
+      context.textAlign = 'end';
 
       var fb_logo = fs.readFileSync('images/facebook-sq.svg');
       const fb_image = new Image()
       fb_image.src = fb_logo;
       context.globalAlpha = 0.6;
-      context.drawImage(fb_image, graphOriginX, rectangleBaseline.sm_b - annotationMargin - 20, 40,40);
+      context.drawImage(fb_image, graphOriginX, rectangleBaseline.sm_b - annotationMargin - 30, 40,40);
       context.globalAlpha = 1.0;
+    }
 
-      context.textAlign = 'end';
-      context.fillText(Math.round(Chamber.stats.ytwi_tot / (Chamber.stats.official_count) * 100) + '% Twitter ', 
-        graphOriginX + graphWidth , rectangleBaseline.sm_b - annotationMargin);
+    if (mediaStats.twit > 20) { 
       context.textAlign = 'start';
+      context.fillText('Twitter '+ mediaStats.twit + '%', 
+        graphOriginX + graphWidth * (1/2) + 60 , rectangleBaseline.sm_b - annotationMargin);
+      context.textAlign = 'end';
 
       var tw_logo = fs.readFileSync('images/twitter-sq.svg');
       const tw_image = new Image()
       tw_image.src = tw_logo;
       context.globalAlpha = 0.6;
-      context.drawImage(tw_image, graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin - 20, 40,40);
+      context.drawImage(tw_image, graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin -30 , 40,40);
       context.globalAlpha = 1.0;
+    }
 
     // Azavea Logo    
     var logo = fs.readFileSync('images/cicero_light_sm.png');
