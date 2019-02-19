@@ -1,25 +1,11 @@
-# CSV file with election results
-filename: 'results.csv'
-
 #CSV file with 
 changefilename: 'chamber-change.csv'
-
 
 # Identifier field with name of each chamber (should be the same in both CSV results and GeoJSON boundaries file)
 chamberIdentifier: 'state'
 
 # Column name from CSV file with the formatted name of each chamber
 chamberName: 'name_formal'
-
-
-# Identifier field for each district (should be the same in both CSV results and GeoJSON boundaries file)
-districtIdentifier: 'district'
-
-# Column name from CSV file for the first of two parties to compare
-partyLeftVotes: 'democratic'
-
-# Column name from CSV file for the second of two parties to compare
-partyRightVotes: 'republican'
 
 
 # Name of first party (left)
@@ -38,8 +24,6 @@ geojson: 'districts.geojson'
 localpolygeojson: 'districts.geojson'
 localcentgeojson: 'geometry/lo-cent.geojson'
 statepolygeojson: 'geometry/us.geojson'
-
-
 
 
 # Output directory for saving infographics
