@@ -12,14 +12,13 @@ var config = YAML.load('config.yml');
 // Print some helpful information to console
 process.stdout.write(
   '===============================\n' +
-  'Reporting Efficiency Gap Scores\n' +
+  'Election Change Reports\n' +
   '===============================\n' +
   'Change Statistics: ' + config.changefilename + '\n' +
   'Local centroids: ' + config.localcentgeojson + '\n\n' +
   'State boundaries: ' + config.statepolygeojson + '\n\n' +
   'Infographics being added to `' + config.outputDirectory + '`\n\n'
 );
-
 
 
 // A collection of districts
@@ -30,15 +29,6 @@ class Chamber {
     this.geometry = geometry;
     this.point = point;
     this.stats = data;
-  }
-
-
-  // District Boundaries: a GeoJSON FeatureCollection of the District's geographic bounds
-  get districtBoundaries() {
-    var boundaries = { type: 'FeatureCollection', features: [] };
-    boundaries.features.push(this.geometry);
-    boundaries.features.push(this.point);
-    return boundaries;
   }
 
 }
@@ -104,10 +94,7 @@ csv(csvData, { columns: true }, function(err,data) {
            return f.properties['id'] === ChamberIdentifier;
       });
 
-
-      //var ChamberName = d[config.ChamberName];
-      var ChamberName = d['name_formal'];
-      
+      var ChamberName = d['name_formal'];      
 
       collectedChambers.push(new Chamber(ChamberName, ChamberIdentifier, chamberGeometry, chamberLocalPoint, d, []))
     }

@@ -1,7 +1,7 @@
 {
-  "name": "efficiency-gap-reports",
+  "name": "chamber-change-reports",
   "version": "0.1.0",
-  "description": "Calculate and display partisan bias in a delegation's districts with efficiency gap scores.",
+  "description": "Calculate and display changes to legislative chambers when new officials take office following an election.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "reports": "node index.js",
@@ -9,7 +9,6 @@
   },
   "keywords": [
     "elections",
-    "gerrymandering",
     "geojson"
   ],
   "author": "Azavea",
