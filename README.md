@@ -1,8 +1,6 @@
 # cicero chamber change reports
 
-![https://cicero-data.github.io/election-change-reports/](https://www.azavea.com/wp-content/uploads/2016/06/azavea-logo-2x.png)
-
-
+![https://cicero-data.github.io/election-change-reports/](https://cicero-data.github.io/election-change-reports/)
 
 Calculate and display changes to legislative chambers when new officials take office following an election. Also display availability of email, webform, facebook and twitter contact information for officials in the chamber.
 
