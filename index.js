@@ -284,6 +284,7 @@ function report(election) {
       { t: 'are new to office after the Nov 6, 2018 elections.', s: sentenceBoldFont, h: false, n: true },
     ];
 
+    // Alternatve sentence if state had redistricting
     var redistrictedSentenceContent = [
       // First Line
       { t: 'Following redistricting, the ' , s: sentenceBoldFont, h: false, n: false},
@@ -296,7 +297,7 @@ function report(election) {
     // Write the new officials sentence
     var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, '#bfff80'  , 34);
     
-    var redistrictedLocales = ['4526','1394','2474','2662'];
+    var redistrictedLocales = config.redistrictedChambers;
 
     if (redistrictedLocales.indexOf( Chamber.abbreviation ) > -1) {
       redistrictedSentenceContent.map(function(phrase) {

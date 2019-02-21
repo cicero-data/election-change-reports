@@ -62,7 +62,7 @@
     var stream = fs.createWriteStream(fileName);
 
     stream.once('open', function(fd) {
-      var html =     getDirectories('change-reports/', function (err, content) {
+      getDirectories('change-reports/', function (err, content) {
           var html = buildHtml(content)
           stream.end(html);
         }) 

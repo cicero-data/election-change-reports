@@ -15,6 +15,11 @@ partyRightName: 'Republicans'
 # Name of other party 
 partyOtherName: 'Other'
 
+redistrictedChambers:
+    - '4526'
+    - '1394'
+    - '2474'
+    - '2662'
 
 # GeoJSON file with district boundaries
 geojson: 'districts.geojson'
