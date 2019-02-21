@@ -1,5 +1,9 @@
 # cicero chamber change reports
 
+![https://cicero-data.github.io/election-change-reports/](https://www.azavea.com/wp-content/uploads/2016/06/azavea-logo-2x.png)
+
+
+
 Calculate and display changes to legislative chambers when new officials take office following an election. Also display availability of email, webform, facebook and twitter contact information for officials in the chamber.
 
 Swap-out and configure legislative data and geographies then automatically generate a series of infographics for each chamber following an election.
