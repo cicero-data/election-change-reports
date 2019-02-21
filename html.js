@@ -16,10 +16,12 @@
           
           var label = items[i].substr(0, items[i].length-4);
 
-          var bi = '<div class="row" id="' + label +'"><div class="col-md-8 pb-4">'
+          var bi =  '<div class="row" id="' + label +'">'
+                   +'<div class="col-md-8 pb-4">'
                    +'<img class="img-fluid rounded" src="change-reports/'+ items[i] +'">'
                    +'<p><a href="">#Back to Top</a></p>'
-                   +'</div></div>'
+                   +'</div>'
+                   +'</div>'
           var ni = '<a href="#'+label+'"><li class="nav-item">'+ label +'</li></a>'
 
           b.push(bi);
@@ -30,15 +32,20 @@
 
 
       var html =  '<!DOCTYPE html>'
-           + '<html><head>' + header + '</head><body>'
-           + '<div class="container-fluid"><div class="row">'
-           + '<nav class="col-md-3 d-none d-md-block bg-light sidebar">'
-           + '<div class="sidebar-sticky"><ul class="nav flex-column">'
-           + nav + '</ul></div></nav>'
-           + '<main class="col-md-9" role="main">' + body + '</main>'
-           + '</div></div>'
+           +'<html><head>' + header + '</head>'
+           +'<body>'
+           +'<div class="container-fluid">'
+           +'<div class="row">'
+           +'<nav class="col-md-3 d-none d-md-block bg-light sidebar">'
+           +'<div class="sidebar-sticky">'
+           +'<ul class="nav flex-column">' + nav + '</ul>'
+           +'</div>'
+           +'</nav>'
+           +'<main class="col-md-9" role="main">' + body + '</main>'
+           +'</div>'
+           +'</div>'
            + bootstrap
-           + '</body></html>';
+           +'</body></html>';
       return html
 
     };
