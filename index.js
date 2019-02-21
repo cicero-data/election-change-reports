@@ -284,20 +284,40 @@ function report(election) {
       { t: 'are new to office after the Nov 6, 2018 elections.', s: sentenceBoldFont, h: false, n: true },
     ];
 
+    var redistrictedSentenceContent = [
+      // First Line
+      { t: 'Following redistricting, the ' , s: sentenceBoldFont, h: false, n: false},
+      { t: (Chamber.stats.official_count) , s: sentenceBoldFont, h: true, n: false},
+      { t: ' members of the ', s: sentenceBoldFont, h: false, n: false },
+      { t: Chamber.name, s: sentenceBoldFont, h: true, n: true },
+      { t: 'are serving in new districts after the Nov 6, 2018 elections.', s: sentenceBoldFont, h: false, n: true },
+    ];
+
     // Write the new officials sentence
     var mainSentence = new Sentence(leftMargin, Math.ceil(grid * 2.375), sentenceFont, '#bfff80'  , 34);
-    mainSentenceContent.map(function(phrase) {
-      mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
-    });
+    
+    var redistrictedLocales = ['4526','1394','2474','2662'];
+
+    if (redistrictedLocales.indexOf( Chamber.abbreviation ) > -1) {
+      redistrictedSentenceContent.map(function(phrase) {
+        mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
+      });
+    } else {
+      mainSentenceContent.map(function(phrase) {
+        mainSentence.write(phrase.t, phrase.s, phrase.h, phrase.n);
+      });
+    }
+
 
     // Bar graph
     var rectangleBaseline =  {
         c_ch_l: Math.floor(graphOriginY + graphHeight * (2/16) ),
         c_ch_b: Math.floor(graphOriginY + graphHeight * (3/16)),
-        o_ch_l: Math.floor(graphOriginY + graphHeight * (7/16)),
-        o_ch_b: Math.floor(graphOriginY + graphHeight * (1/2)),
-        sm_t: Math.floor(graphOriginY + graphHeight * (3/4)),
-        sm_b: Math.floor(graphOriginY + graphHeight * (7/8))
+        o_ch_l: Math.floor(graphOriginY + graphHeight * (6/16)),
+        o_ch_b: Math.floor(graphOriginY + graphHeight * (7/16)),
+        sm_l: Math.floor(graphOriginY + graphHeight * (10.8/16)),
+        sm_t: Math.floor(graphOriginY + graphHeight * (12.3/16)),
+        sm_b: Math.floor(graphOriginY + graphHeight * (14/16))
     }
 
 
@@ -417,6 +437,9 @@ function report(election) {
       context.fillRect(graphOriginX + voteScale(ovotes[0]) + voteScale(ovotes[1]) + 3, rectangleBaseline.o_ch_b, voteScale(ovotes[2] - (ovotes[0] + ovotes[1])) - 4, rectangleHeight);
     }
 
+    context.fillStyle = election.parties.other.color;
+    context.fillText('Contact Information Available', graphOriginX, rectangleBaseline.sm_l - annotationMargin);
+
     context.fillStyle = ptbackground;
     var mediaStats =  {
         emai: Math.round((Chamber.stats.emai_tot / Chamber.stats.official_count) * 100),
@@ -425,10 +448,15 @@ function report(election) {
         fcbk: Math.round((Chamber.stats.yfcb_tot / Chamber.stats.official_count) * 100)
     }
 
-    if (mediaStats.emai > 20) { 
+    
       context.textAlign = 'start';
+      if (mediaStats.emai > 20) { 
       context.fillText( 'Email ' + mediaStats.emai + '%', 
         graphOriginX + 60, rectangleBaseline.sm_t - annotationMargin);
+      } else {
+      context.fillText( 'Email <20%', 
+        graphOriginX + 60, rectangleBaseline.sm_t - annotationMargin);
+      }
       context.textAlign = 'end';
 
       var em_logo = fs.readFileSync('images/email.svg');
@@ -437,12 +465,16 @@ function report(election) {
       context.globalAlpha = 0.6;
       context.drawImage(em_image, graphOriginX, rectangleBaseline.sm_t - annotationMargin - 30, 40,40);
       context.globalAlpha = 1.0;
-    }
 
-    if (mediaStats.webf > 20) { 
+    
       context.textAlign = 'start';
+      if (mediaStats.webf > 20) { 
       context.fillText('Webform ' + mediaStats.webf + '%', 
         graphOriginX + graphWidth * (1/2) + 60, rectangleBaseline.sm_t - annotationMargin);
+      } else {
+        context.fillText('Webform <20%', 
+        graphOriginX + graphWidth * (1/2) + 60, rectangleBaseline.sm_t - annotationMargin);
+      }
       context.textAlign = 'end';
 
       var wf_logo = fs.readFileSync('images/mail-bulk.svg');
@@ -451,12 +483,16 @@ function report(election) {
       context.globalAlpha = 0.6;
       context.drawImage(wf_image, graphOriginX + graphWidth * (1/2) , rectangleBaseline.sm_t - annotationMargin - 30, 40,40);
       context.globalAlpha = 1.0;
-    }
 
-    if (mediaStats.fcbk > 20) { 
+    
       context.textAlign = 'start';
+      if (mediaStats.fcbk > 20) { 
       context.fillText('Facebook '+ mediaStats.fcbk + '%', 
         graphOriginX + 60, rectangleBaseline.sm_b - annotationMargin);
+      } else {
+      context.fillText('Facebook <20%', 
+        graphOriginX + 60, rectangleBaseline.sm_b - annotationMargin);
+      }
       context.textAlign = 'end';
 
       var fb_logo = fs.readFileSync('images/facebook-sq.svg');
@@ -465,12 +501,16 @@ function report(election) {
       context.globalAlpha = 0.6;
       context.drawImage(fb_image, graphOriginX, rectangleBaseline.sm_b - annotationMargin - 30, 40,40);
       context.globalAlpha = 1.0;
-    }
 
-    if (mediaStats.twit > 20) { 
+    
       context.textAlign = 'start';
+      if (mediaStats.twit > 20) { 
       context.fillText('Twitter '+ mediaStats.twit + '%', 
         graphOriginX + graphWidth * (1/2) + 60 , rectangleBaseline.sm_b - annotationMargin);
+      } else {
+        context.fillText('Twitter <20%', 
+        graphOriginX + graphWidth * (1/2) + 60 , rectangleBaseline.sm_b - annotationMargin);
+      }
       context.textAlign = 'end';
 
       var tw_logo = fs.readFileSync('images/twitter-sq.svg');
@@ -479,7 +519,6 @@ function report(election) {
       context.globalAlpha = 0.6;
       context.drawImage(tw_image, graphOriginX + graphWidth * (1/2), rectangleBaseline.sm_b - annotationMargin -30 , 40,40);
       context.globalAlpha = 1.0;
-    }
 
     // Azavea Logo    
     var logo = fs.readFileSync('images/cicero_light_sm.png');
@@ -489,7 +528,7 @@ function report(election) {
     context.drawImage(image, leftMargin, height - leftMargin * 1.1);
     context.globalAlpha = 1.0;
 
-    process.stdout.write(Chamber.name + ': ' + Math.round(Chamber.efficiencyGapImputation * 100) / 100 + '\n');
+    process.stdout.write(Chamber.name  + '\n');
 
     // Save image to the output directory
     canvas.pngStream().pipe(fs.createWriteStream(config.outputDirectory + '/' + Chamber.name + ".png"));
